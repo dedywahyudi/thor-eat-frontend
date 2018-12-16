@@ -1,0 +1,97 @@
+@import "../../../assets/scss/base/_variables";
+
+// ORG-SELECTION-WRAPPER
+.aside {
+  width: 284px;
+  position: absolute;
+  left: 0;
+  height: calc(100% - 34px);
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1.5px 2.598px 7px 0px rgba(1, 2, 2, 0.02);
+  padding: 0 32px 34px 27px;
+  z-index: 11;
+  .org-selection-wrapper {
+    border-bottom: 1px solid #ededed;
+    padding: 36px 0 20px 0;
+    .org-selection-txt {
+      font-size: 14px;
+      color: #595959;
+      font-weight: 300;
+      line-height: 18px;
+      padding: 9px 0 12px 0;
+    }
+  }
+  //ORG-SELECTION-TITLE
+  .org-selection-title {
+    font-size: 18px;
+    color: $content-text-black;
+    font-weight: 600;
+  }
+  .org-selection-list-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .org-select-list-content {
+      .org-selection-title {
+        padding: 21px 0 17px 0;
+      }
+      .org-list-txt {
+        font-size: 13px;
+        color: #595959;
+        font-weight: 300;
+        display: none;
+      }
+    }
+    .org-input-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    // SEARCH-LIST-SECTION
+    .search-list-section {
+      border: 1px solid rgb(162, 162, 162);
+      border-radius: 3px;
+      padding: 6px 6px 10px 10px;
+      border-top: none;
+      position: relative;
+      top: -2px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .scroll-wrapper {
+      overflow-y: auto;
+      height: 100%;
+    }
+    ul {
+      li {
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        border-bottom: 1px solid rgb(220, 220, 220);
+        font-size: 14px;
+        color: $content-text-black;
+        font-weight: 300;
+        line-height: 18px;
+        padding: 4px 10px 4px 5px;
+        margin-right: 8px;
+        cursor: pointer;
+        &:last-child {
+          border-bottom: none;
+        }
+        &:hover {
+          background: rgb(38, 141, 200);
+          color: $content-text-white;
+        }
+      }
+      // ACTIVE
+      .is-active {
+        background: rgb(38, 141, 200);
+        color: $content-text-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+<!-- SEARCH RESULT WRAPPER -->
+<div class="search-result-wrapper top-issues ">
+  <!-- SEARCH TABLE TITLE -->
+  <div class="search-table-title no-print" #resultsTitle>
+    <div class="search-result-title">
+        <h4><span l10nTranslate>Issues</span> ({{totalRows}})</h4>
+        <!-- BLACK SQURE -->
+        <span class="black-squre" *ngIf="showReadAll['unreadNumber'] > 0" l10nTranslate>
+            {{showReadAll['unreadNumber']}} Unread
+        </span>
+        <!-- <span class="black-squre bg-gray" *ngIf="showReadAll['unreadTopNumber'] === 0" l10nTranslate>
+          You Read All
+        </span> -->
+    </div>
+    <div class="right-side-btn">
+      <div class="print-email-btn">
+        <a href="javascript:;" class="print-btn" (click)="print()">
+          <span class="print-icon"></span>
+          <span class="right-btn-txt">Print</span>
+        </a>
+        <!-- EMAIL BTN -->
+        <a href="javascript:;" (click)="sendEmail()" class=" email-btn blue-btn" *ngIf="showSendMail">
+          <span class="email-icon"></span>
+          <span class="right-btn-txt" l10nTranslate>Email</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- SEARCH TABLE -->
+  <!-- SEARCH TABLE -->
+  <div class="main-search-table cs-only-issues-table">
+    <div class="search-table">
+      <table>
+        <!-- THEAD -->
+        <thead #resultsHeader>
+          <tr>
+            <th class="th-check no-print">
+              <div class="th-chkbox">
+                <app-checkbox [isChecked]="isThChk" value="new-full-name" (getChange)="thToggleCheck($event)" className="sm-checkbox"></app-checkbox>
+              </div>
+            </th>
+            <th class="th-created-by">
+              <span l10nTranslate>Created By</span>
+            </th>
+            <th class="th-region">
+              <span l10nTranslate>Region</span>
+            </th>
+            <th class="th-division">
+              <span l10nTranslate>Division</span>
+            </th>
+            <th class="th-issue-description">
+              <span l10nTranslate>Issue Description</span>
+            </th>
+            <th class="th-action-plan">
+              <span l10nTranslate>Action Plan</span>
+            </th>
+            <th class="th-person-responsible">
+              <span l10nTranslate>Person Responsible</span>
+            </th>
+            <th class="th-created-on">
+              <span l10nTranslate>Created on</span>
+            </th>
+            <th class="th-priority">
+              <span l10nTranslate>Priority</span>
+            </th>
+            <th class="th-details no-print">
+              <span l10nTranslate>Details</span>
+            </th>
+            <th class="th-action no-print" *ngIf="currentUser && currentUser.role.name !== 'StandardUser'">
+              <span l10nTranslate>Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <!-- TBODY -->
+        <tbody>
+          <tr *ngFor="let item of data | paginate: paginate; let i = index;">
+            <td class="td-check no-print">
+              <app-checkbox [isChecked]="item.isChecked" value="new-full-name" (getChange)="checkBoxChange(i, $event)"></app-checkbox>
+            </td>
+            <td class="th-created-by">
+              <span class="bold-content">{{item.createdBy}}</span>
+            </td>
+            <td class="td-region">
+              <span class="org-content">{{item.region}}</span>
+            </td>
+            <td class="td-division">
+              <span class="org-content">{{item.division}}</span>
+            </td>
+            <td class="td-issue-description">
+              <p class="org-content" *ngIf="showOnlyMe">
+                {{item.description | slice : 0 : 100 }}
+                <span *ngIf="item.description && item.description.length > 100">
+                  ...
+                </span>
+              </p>
+              <span class="org-content" *ngIf="!showOnlyMe">
+                {{item.description}}
+              </span>
+            </td>
+            <td class="td-action-plan">
+              <p class="org-content">
+                {{item.actionPlan}}
+              </p>
+            </td>
+            <td class="td-person-responsible">
+              <span class="bold-content">{{item.personsResponsible}}</span>
+            </td>
+            <td class="td-created-on">
+              <span class="org-content">{{item.createdDate | datex}}</span>
+            </td>
+            <td class="td-priority">
+              <span *ngIf="item.priority === 1">
+                {{item.priority}}
+              </span>
+              <span *ngIf="item.priority === 2">
+                {{item.priority}}
+              </span>
+              <span *ngIf="item.priority === 3">
+                {{item.priority}}
+              </span>
+            </td>
+            <td class="td-details no-print">
+              <a href="javascript:;" class="blue-link" *ngIf="!showOnlyMe" [routerLink]="['/c-s-issues/detail/' + item.id]"
+                l10nTranslate>
+                View Details
+              </a>
+              <a href="javascript:;" class="blue-link" *ngIf="showOnlyMe" [routerLink]="['/c-s-issues/detail/' + item.id]"
+                l10nTranslate>
+                Details
+              </a>
+            </td>
+            <td class="td-action no-print" *ngIf="currentUser && currentUser.role.name !== 'StandardUser'">
+              <div class="write-del-icons">
+                <a class="write-icon" routerLink="/edit-cns-issue/{{item.id}}">
+                </a>
+                <span class="delete-icon" (click)="delete(item)">
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="issues-background no-print" #bg></div>

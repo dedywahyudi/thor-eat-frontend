@@ -1,0 +1,69 @@
+<!-- SEARCH RESULT WRAPPER -->
+<div class="search-result-wrapper">
+    <!-- SEARCH TABLE TITLE -->
+    <div class="search-table-title no-print">
+      <div class="search-result-title">
+        <h4 *ngIf="data"><span l10nTranslate>divisionOrganization.organizationTableTitle</span> ({{data.length}})</h4>
+            <!-- BLACK SQURE -->
+      </div>
+      <div class="right-side-btn">
+        <app-textbox [isSearch]="true" name="searchs" className="black-search-input-border-bottom" type="search"
+          [(ngModel)]="filterCriteria.keyword " [value]="filterCriteria.keyword" ngDefaultControl placeholder="Search Organization"
+          (keyUp)="onFilter()"></app-textbox>
+        <div class="print-email-btn no-left-boder">
+          <!-- <a href="javascript:;" class="print-btn" (click)="print()">
+            <span class="print-icon"></span>
+            <span class="right-btn-txt">Print</span>
+          </a> -->
+          <a href="javascript:;" class="add-btn blue-btn" (click)="addRow()">
+            <span class="right-btn-txt">Add New Organization</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- SEARCH TABLE -->
+    <div class="main-search-table">
+      <div class="search-table">
+        <table>
+          <!-- THEAD -->
+          <thead>
+            <tr>
+              <th class="th-division-name">
+                <span l10nTranslate>Organization Name</span>
+              </th>
+              <th class="th-action no-print">
+                <span l10nTranslate>Actions</span>
+              </th>
+            </tr>
+          </thead>
+          <!-- TBODY -->
+          <tbody> 
+            <tr *ngFor="let item of data | paginate: paginationOptions; let i = index;">
+              <td class="td-division-name">
+                <span class="bold-content">{{item.name}}</span>
+              </td>
+              <td class="td-action no-print">
+                <div class="write-del-icons">
+                  <a class="write-icon" (click)="editRow(item)">
+                  </a>
+                  <span class="delete-icon" (click)="deleteRow(item)">
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="pagination-wrapper">
+    <app-pagination [paginate]="paginationOptions" (goto)="setPage($event)" (clickChangePageSize)="changePageSize($event)"
+      *ngIf="paginationOptions.totalItems"></app-pagination>
+  </div>
+  
+  <app-model (createOrganization)="createOrganization($event)" (close)="isOpenModal=$event" (updateOrganization)="editOrganization($event)"
+    (confirmDelete)="deleteOrganization($event)" [rowData]="rowData" *ngIf="isOpenModal"
+    [modalType]="modalType" [modalProperties]="modalProperties"></app-model>
+  
+  

@@ -1,0 +1,116 @@
+<!-- SEARCH RESULT WRAPPER -->
+<div class="search-result-wrapper">
+  <!-- SEARCH TABLE TITLE -->
+  <div class="search-table-title no-print">
+    <div class="search-result-title">
+      <h4 *ngIf="data"><span l10nTranslate>divisionOrganization.divisionTableTitle</span> ({{data.length}})</h4>
+          <!-- BLACK SQURE -->
+    </div>
+    <div class="right-side-btn">
+      <app-textbox [isSearch]="true" name="searchs" className="black-search-input-border-bottom" type="search"
+        [(ngModel)]="filterCriteria.keyword " [value]="filterCriteria.keyword" ngDefaultControl placeholder="Search Division or Sub-Divisions"
+        (keyUp)="onFilter()"></app-textbox>
+      <div class="print-email-btn no-left-boder">
+        <!-- <a href="javascript:;" class="print-btn" (click)="print()">
+          <span class="print-icon"></span>
+          <span class="right-btn-txt">Print</span>
+        </a> -->
+        <a href="javascript:;" class="add-btn blue-btn" (click)="addRow()">
+          <span class="right-btn-txt">Add New Division or Sub-Division</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- SEARCH TABLE -->
+  <div class="main-search-table">
+    <div class="search-table">
+      <table>
+        <!-- THEAD -->
+        <thead>
+          <tr>
+            <th class="arrow-flag"></th>
+            <th class="th-division-id">
+              <span l10nTranslate>Division ID</span>
+            </th>
+            <th class="th-division-name">
+              <span l10nTranslate>Division Name</span>
+            </th>
+            <th class="th-division-region">
+              <span l10nTranslate>Region</span>
+            </th>
+            <th class="th-action no-print">
+              <span l10nTranslate>Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <!-- TBODY -->
+        <tbody *ngFor="let item of data | paginate: paginationOptions; let i = index;">
+          <tr [ngClass]="{'odd-row': i%2}" (click)="expand(i, $event)">
+            <td class="td-arrow-flag">
+              <span class="arrow-icon up-arrow" *ngIf="expandIndex==i"></span>
+              <span class="arrow-icon down-arrow" *ngIf="expandIndex!=i"></span>
+            </td>
+            <td class="td-division-id">
+              <span class="bold-content">{{item.id}}</span>
+            </td>
+            <td class="td-division-name">
+              <span class="bold-content">{{item.name}}</span>
+            </td>
+            <td class="td-division-region">
+              <span class="bold-content">{{item.region}}</span>
+            </td>
+            <td class="td-action no-print">
+              <div class="write-del-icons">
+                <a class="write-icon" (click)="editRow(item, $event)">
+                </a>
+                <span class="delete-icon" (click)="deleteRow(item, $event)">
+                </span>
+              </div>
+            </td>
+          </tr>
+          <ng-template [ngIf]="expandIndex==i">
+            <tr class="sub-division-row title-row">
+              <td class="arrow-flag"></td>
+              <td class="td-division-id">
+                <span class="blue-text" *ngIf="item.children?.length">Sub-Division</span>
+                <span class="blue-text" *ngIf="!item.children?.length">No Sub-Division Found</span>
+              </td>
+              <td class="td-division-name"></td>
+              <td class="td-division-region"></td>
+              <td class="td-action no-print"></td>
+            </tr>
+            <tr class="sub-division-row" *ngFor="let subDivision of item.children">
+                <td class="arrow-flag"></td>
+                <td class="td-division-id">
+                  <span class="bold-content">{{subDivision.id}}</span>
+                </td>
+                <td class="td-division-name">
+                  <span class="bold-content">{{subDivision.name}}</span>
+                </td>
+                <td class="td-division-region">
+                  <span class="bold-content">{{subDivision.region}}</span>
+                </td>
+                <td class="td-action no-print">
+                  <div class="write-del-icons">
+                    <a class="write-icon" (click)="editRow(subDivision, $event)">
+                    </a>
+                    <span class="delete-icon" (click)="deleteRow(subDivision, $event)">
+                    </span>
+                  </div>
+                </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="pagination-wrapper">
+  <app-pagination [paginate]="paginationOptions" (goto)="setPage($event)" (clickChangePageSize)="changePageSize($event)"
+    *ngIf="paginationOptions.totalItems"></app-pagination>
+</div>
+
+<app-model (createDivision)="createDivision($event)" (close)="isOpenModal=$event" (updateDivision)="editDivision($event)"
+  (confirmDelete)="deleteDivision($event)" [rowData]="rowData" *ngIf="isOpenModal"
+  [modalType]="modalType" [modalProperties]="modalProperties"></app-model>

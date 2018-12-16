@@ -1,0 +1,12 @@
+<!-- TEXTBOX -->
+<div class="textarea-wrapper {{className}}">
+  <textarea
+    [name]="name"
+    class="textarea"
+    [placeholder]="placeholder"
+    (keyup)="onKey($event)"
+    [(ngModel)]="value"
+    [attr.maxLength]="maxLength"
+  ></textarea>
+</div>
+<!-- TEXTBOX END -->

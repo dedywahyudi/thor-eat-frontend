@@ -1,0 +1,45 @@
+// KEYWORD SEARCH PAGE
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+// KEYWORD-SEARCH-WRAPPER
+.keyword-search-wrapper {
+  padding: 15px 20px 0 20px;
+}
+
+// PAGINATION-WRAPPER
+.pagination-wrapper {
+  padding: 25px 0 112px 0;
+  margin-bottom: 100px;
+}
+
+main {
+  width: auto;
+}
+
+app-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+:host ::ng-deep {
+  .search-table-title, th {
+    position: sticky;
+    z-index: 999;
+  }
+
+  .search-table-title {
+    padding: 13px 0;
+    margin-top: 0px;
+    background: #ffffff;
+  }
+
+  th {
+    background: #268dc8;
+  }
+}

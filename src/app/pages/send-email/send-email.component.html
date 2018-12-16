@@ -1,0 +1,27 @@
+<!-- SEND EMAIL PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container send-email-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper">
+    <app-header l10n-title title="sendEmail.title" pageType="send-email">
+    </app-header>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="send-email-wrapper">
+      <app-send-mail-form (sending)="sending($event)" [mailContent]="mailContent" [hideStandardSelected]="hideStandardSelected">
+      </app-send-mail-form>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+<app-model (close)="isOpenModal=$event" *ngIf="isOpenModal" [modalType]="modalType" [modalProperties]="modalProperties"></app-model>
+<!-- SEND EMAIL PAGE END -->

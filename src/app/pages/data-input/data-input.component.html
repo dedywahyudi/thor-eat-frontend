@@ -1,0 +1,27 @@
+<!-- DATA INPUT PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container data-input-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper">
+    <app-header l10n-title title="dataInput.title" pageType="data-input">
+    </app-header>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="data-input-wrapper">
+      <app-navigation-tab (toggleNav)="toggleForm($event)"></app-navigation-tab>
+      <app-data-input-forms [activeTab]="activeTab" (cancelClick)="cancel($event)" (sendModalData)="sendModalData($event)"></app-data-input-forms>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+<app-model (close)="isOpenModal=$event" *ngIf="isOpenModal" [modalType]="modalType" [modalProperties]="modalProperties"></app-model>
+<!-- DATA INPUT PAGE END -->

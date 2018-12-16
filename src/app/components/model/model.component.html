@@ -1,0 +1,370 @@
+<!-- Model box -->
+<div class="model-bg"></div>
+<div class="model-box" *ngIf="modalType === 'delete-row'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-icon"></span>
+    <span class="model-txt">Confirmation</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p>Are you sure you would like to delete the row?</p>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="confirmDeleteClick()">Confirm</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+<div class="model-box" *ngIf="modalType === 'email-success'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-icon"></span>
+    <span class="model-txt">Send Email Success!</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p class="pb15">Your email has been sent to these following recipients: </p>
+    <!-- EMAIL LIST -->
+    <div class="email-list">
+      <ul>
+        <li *ngFor="let item of modalProperties.emailList;let i = index">
+          <a href="mailto:{{item}}" class="links">{{item}}</a>
+        </li>
+      </ul>
+    </div>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="cancel()">Close</a>
+    </div>
+  </div>
+</div>
+<div class="model-box" *ngIf="modalType === 'email-failed'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-icon"></span>
+    <span class="model-txt">Send Email Failed!</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p class="red">Oops your email cannot be sent</p>
+    <p class="blue">{{modalProperties.message}}</p>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="cancel()">Close</a>
+    </div>
+  </div>
+</div>
+<div class="model-box" *ngIf="modalType === 'failed'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-txt-without-icon">{{modalProperties.title}}</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p class="red">{{modalProperties.shortmessage}}</p>
+    <!-- <p class="blue">{{modalProperties.message}}</p> -->
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="cancel()">Close</a>
+    </div>
+  </div>
+</div>
+<div class="model-box width367" *ngIf="modalType === 'create-new-user'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-txt-without-icon" l10nTranslate>Create New User</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <!-- FORM BOXS -->
+    <form class="form-boxs" #newUserForm="ngForm">
+      <!-- error -->
+      <div class="error" *ngIf="modalProperties && modalProperties.error">
+          {{modalProperties.error}}
+        </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Username</label>
+        <app-textbox type="text" name="username" [isSearch]="false" [(ngModel)]="rowData.username" [value]="rowData.username"
+          placeholder='' ngDefaultControl></app-textbox>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Password</label>
+        <app-textbox type="Password" name="password" [isSearch]="false" [(ngModel)]="rowData.password" [value]="rowData.password"
+        [hasShowPassword]="true" required placeholder='' ngDefaultControl></app-textbox>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Fullname</label>
+        <app-textbox type="text" name="fullname" [isSearch]="false" [(ngModel)]="rowData.fullName" [value]="rowData.fullName"
+          placeholder='' ngDefaultControl></app-textbox>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Role</label>
+        <app-dropdown [options]="roleOptions" (optSelect)="onSelectRole($event)" [selected]="rowData.role.name"
+          placeholder="Select" className="data-input-fields"></app-dropdown>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Email Address</label>
+        <app-textbox type="email" name="emails" [(ngModel)]="rowData.email" [value]="rowData.email" required
+          placeholder='' ngDefaultControl></app-textbox>
+      </div>
+    </form>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" [ngClass]="{'disabled': !newUserForm.form.valid || rowData.role.name === undefined}" class="blue-btn"
+        (click)="addUser()">Submit</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+<div class="model-box width367" *ngIf="modalType === 'create-new-org'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-txt-without-icon" l10nTranslate>Create New Org</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <!-- FORM BOXS -->
+    <form class="form-boxs" #newUserForm="ngForm">
+      <!-- error -->
+      <div class="error" *ngIf="modalProperties && modalProperties.error">
+        {{modalProperties.error}}
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Org</label>
+        <app-textbox type="text" name="org" [isSearch]="false" [(ngModel)]="rowData.org" [value]="rowData.org"
+                     placeholder='' ngDefaultControl></app-textbox>
+      </div>
+    </form>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" [ngClass]="{'disabled': !rowData.org}" class="blue-btn"
+         (click)="addUser()">Submit</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+<div class="model-box width367" *ngIf="modalType === 'create-new-division' || modalType === 'edit-division'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-txt-without-icon" l10nTranslate>{{modalProperties.title}}</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <!-- FORM BOXS -->
+    <form class="form-boxs" #newUserForm="ngForm">
+      <!-- error -->
+      <div class="error" *ngIf="modalProperties && modalProperties.error">
+        {{modalProperties.error}}
+      </div>
+      <div class="row-line">
+        <label l10nTranslate>Parent Division</label>
+        <app-dropdown [options]="divisionOptions" (optSelect)="onSelectParentDivision($event)" [selected]="rowData.parentDivision"
+          placeholder='' className="data-input-fields"></app-dropdown>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate class="required-field">Region</label>
+        <app-dropdown [options]="regionOptions" (optSelect)="onSelectRegion($event)" [selected]="rowData.region"
+          placeholder='' className="data-input-fields" required></app-dropdown>
+      </div>
+
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate *ngIf="!rowData.parentDivisionId" class="required-field">Division ID</label>
+        <label l10nTranslate *ngIf="rowData.parentDivisionId" class="required-field">Sub-Division ID</label>
+        <app-textbox type="text" name="org" [isSearch]="false" [(ngModel)]="rowData.divisionId" [value]="rowData.divisionId"
+                     placeholder='' ngDefaultControl required></app-textbox>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate *ngIf="!rowData.parentDivisionId" class="required-field">Division Name</label>
+        <label l10nTranslate *ngIf="rowData.parentDivisionId" class="required-field">Sub-Division Name</label>
+        <app-textbox type="text" name="org" [isSearch]="false" [(ngModel)]="rowData.divisionName" [value]="rowData.divisionName"
+                     placeholder='' ngDefaultControl required></app-textbox>
+      </div>
+    </form>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" [ngClass]="{'disabled': !rowData.region || !rowData.divisionId || !rowData.divisionName}" class="blue-btn"
+         (click)="addDivision()">Submit</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+<div class="model-box width367" *ngIf="modalType === 'create-new-organization' || modalType === 'edit-organization'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-txt-without-icon" l10nTranslate *ngIf="modalType === 'create-new-organization'">Create New Organization</span>
+    <span class="model-txt-without-icon" l10nTranslate *ngIf="modalType === 'edit-organization'">Edit Organization</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <!-- FORM BOXS -->
+    <form class="form-boxs" #newUserForm="ngForm">
+      <!-- error -->
+      <div class="error" *ngIf="modalProperties && modalProperties.error">
+        {{modalProperties.error}}
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Organization Name</label>
+        <app-textbox type="text" name="org" [isSearch]="false" [(ngModel)]="rowData.organizationName" [value]="rowData.organizationName"
+                       placeholder='' ngDefaultControl></app-textbox>
+      </div>
+    </form>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" [ngClass]="{'disabled': !rowData.organizationName}" class="blue-btn"
+          (click)="addOrganization()">Submit</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+<div class="model-box width367" *ngIf="modalType === 'edit-user'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-txt-without-icon" l10nTranslate>Edit User</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <!-- FORM BOXS -->
+    <form class="form-boxs" #editUserForm="ngForm">
+      <!-- error -->
+      <div class="error" *ngIf="modalProperties && modalProperties.error">
+          {{modalProperties.error}}
+        </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Username</label>
+        <app-textbox type="text" name="username" [isSearch]="false" [(ngModel)]="rowData.username" [value]="rowData.username"
+          required placeholder='' ngDefaultControl></app-textbox>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Password</label>
+        <app-textbox type="Password" name="password" [isSearch]="false" [(ngModel)]="rowData.password" [value]="rowData.password"
+          [hasShowPassword]="true" placeholder='' ngDefaultControl></app-textbox>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Fullname</label>
+        <app-textbox type="text" name="fullname" [isSearch]="false" [(ngModel)]="rowData.fullName" [value]="rowData.fullName"
+          placeholder='' ngDefaultControl></app-textbox>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Role</label>
+        <app-dropdown [options]="roleOptions" (optSelect)="onSelectRole($event)" [selected]="rowData.role.name"
+          placeholder='' className="data-input-fields"></app-dropdown>
+      </div>
+      <!-- ROW LINE -->
+      <div class="row-line">
+        <label l10nTranslate>Email Address</label>
+        <app-textbox type="email" name="emails" [(ngModel)]="rowData.email" [value]="rowData.email" required
+          placeholder='' ngDefaultControl></app-textbox>
+      </div>
+    </form>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" [ngClass]="{'disabled': !editUserForm.form.valid}" class="blue-btn" (click)="updateUserData()">Update</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+<div class="model-box" *ngIf="modalType === 'delete-user-row' || modalType === 'delete-division-row' || modalType === 'delete-organization-row'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-icon"></span>
+    <span class="model-txt">Confirmation</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p>Are you sure you would like to delete the row?</p>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="confirmDeleteClick()">Confirm</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<div class="model-box" *ngIf="modalType === 'approve'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-icon"></span>
+    <span class="model-txt">Confirmation</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p>Are you sure you would like to Approve?</p>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="confirmApproveClick()">Confirm</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<div class="model-box" *ngIf="modalType === 'reject'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-icon"></span>
+    <span class="model-txt">Confirmation</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body reject">
+  <form class="form-boxs" #newUserForm="ngForm">
+    <p>Are you sure you would like to Reject?</p>
+    <div class="reject-textbox">
+     <app-textarea ngDefaultControl name="reject" placeholder="Reject Message" [isSearch]="false" [(ngModel)]="rejectMessage"
+      [value]="rejecteMessage" className="data-input-fields"></app-textarea>
+    </div>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="confirmRejectClick()">Confirm</a>
+      <a href="javascript:;" class="border-btn" (click)="cancel()">Cancel</a>
+    </div>
+  </form>
+  </div>
+</div>
+
+<div class="model-box" *ngIf="modalType === 'success'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-txt-without-icon">{{modalProperties.title}}</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p>{{modalProperties.body}}</p>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="cancel()">Ok</a>
+    </div>
+  </div>
+</div>
+
+<div class="model-box" *ngIf="modalType === 'approve-reject-success'">
+  <!-- MODEL-TITLE -->
+  <div class="model-title">
+    <span class="model-icon"></span>
+    <span class="model-txt">{{modalProperties.title}}</span>
+  </div>
+  <!-- MODEL BODY -->
+  <div class="model-body">
+    <p>{{modalProperties.message}}</p>
+    <div class="contact-mail">
+      <a *ngFor="let mail of modalProperties.emailAddress" href="mailto:{{mail}}" class="email-content" >{{mail}}</a>
+    </div>
+    <!-- MODEL BTN  -->
+    <div class="model-btn">
+      <a href="javascript:;" class="blue-btn" (click)="cancel()">Close</a>
+    </div>
+  </div>
+</div>

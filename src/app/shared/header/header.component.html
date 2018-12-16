@@ -1,0 +1,72 @@
+<!-- HEADER -->
+<header class="header no-print">
+  <!-- COMMON HEADER -->
+  <div class="header-main">
+    <h1 class="header-lbl">
+      <a (click)="backPage()" class="back-icon" *ngIf="pageType==='send-email' || pageType==='edit-standard' || pageType==='edit-cs-issue'"></a>
+      <span class="title-txt" l10nTranslate>
+        {{title}}
+      </span>
+    </h1>
+    <nav class="header-main-right">
+      <ul class="header-nav-items">
+        <li class="lang-dropdown">
+          <label class="label" l10nTranslate>language</label>
+          <div class="header-lang-dropdown">
+            <app-dropdown [selected]="selectedLaguage" [options]="langOptions" (optSelect)="selectLocale($event)"
+              className="country-dropdown"></app-dropdown>
+          </div>
+        </li>
+        <li class="alert-header" *ngIf="isLoggedIn">
+          <a href="javascript:;" class="alert-icon" (click)="showNotification()"></a>
+        </li>
+        <li class="logout-btn" *ngIf="isLoggedIn" (click)="logout()">
+          <a>
+            <span class="icon"></span>
+            <span l10nTranslate>logout</span>
+          </a>
+        </li>
+        <li class="login" *ngIf="!isLoggedIn" (click)="login()">
+          <a routerLink="/login" class="blue-lt-btn login-btn">
+            Login
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- notification-boxs -->
+    <div class="model-bg" *ngIf="showNotify" (click)="showNotify = false"></div>
+    <div class="notification-boxs" *ngIf="showNotify">
+      <div class="noti-title">
+        <h4 l10nTranslate>Notifications</h4>
+        <a href="javascript:;" class="close-icon" (click)="showNotify = false"></a>
+      </div>
+      <div class="notific-content">
+        <ul>
+          <li *ngFor="let item of notifyData">
+            <div class="item">
+              <div class="record-name" *ngIf="item.recordName">{{item.recordName}}</div>
+              <div class="gray-txt">{{item.user.fullName + ' ' + item.operation +' ' + item.recordType}} on
+                {{item.modifiedDate | datex}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- COMMON HEADER END -->
+
+  <!-- KEYWORD SEARCH HEADER -->
+  <div class="keyword-search-header" *ngIf="pageType==='keyword-search'">
+    <app-header-search (getFilter)="onFilter($event)" (resetFilter)="reset($event)"></app-header-search>
+  </div>
+  <!-- KEYWORD SEARCH HEADER END -->
+
+  <!-- ORG SEARCH HEADER -->
+  <div class="org-search-header" *ngIf="pageType==='org-search'">
+    <app-header-org-search [tabs]="tabs" [selectedEmailLength]="selectedEmailLength" (sendTab)="getTab($event)"
+      (sendActive)="getActive($event)"></app-header-org-search>
+  </div>
+  <!-- ORG SEARCH HEADER END -->
+
+</header>
+<!-- HEADER END -->

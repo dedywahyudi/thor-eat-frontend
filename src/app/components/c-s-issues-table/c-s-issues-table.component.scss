@@ -1,0 +1,43 @@
+@import "../../../assets/scss/base/_variables";
+
+@mixin sticked() {
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  z-index: 999;
+}
+
+
+app-checkbox {
+  margin-top: 6px;
+}
+
+.cs-only-issues-table {
+  thead {
+    background: #268dc8;
+    tr {
+      th {
+        span {
+          color: #fff;
+        }
+      }
+    }
+  } 
+}
+
+.td-action-plan, .td-issue-description {
+  .org-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    display: -webkit-box;
+    line-height: 20px;
+    max-height: 100px;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    margin-right: 12px;
+  }
+}
+

@@ -1,0 +1,5 @@
+<label class="lbl {{className}}">
+  <input type="checkbox" [(ngModel)]="isChecked" [name]="label" [value]="value" (change)="change()" [disabled]="disabled">
+  <span class="chk-box"></span>
+  <span class="lbl-txt" (click)="labelClick(data)" *ngIf="label">{{label}}</span>
+</label>

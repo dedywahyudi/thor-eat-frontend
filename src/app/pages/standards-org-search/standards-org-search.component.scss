@@ -1,0 +1,20 @@
+// STANDARDS-ORG-SEARCH PAGE
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.standard-org-search-wrapper {
+  display: none;
+  &.is-active {
+    display: flex;
+  }
+  .standard-org-left {
+    width: 343px;
+  }
+  .standard-org-right {
+    flex: 1;
+    padding: 70px 20px 20px 75px;
+  }
+}

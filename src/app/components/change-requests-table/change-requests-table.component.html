@@ -1,0 +1,98 @@
+<!-- SEARCH RESULT WRAPPER -->
+<div class="search-result-wrapper">
+  <!-- SEARCH TABLE TITLE -->
+  <div class="search-table-title no-print">
+    <div class="search-result-title">
+      <h4 *ngIf="data"><span l10nTranslate>changeRequests.tableTitle</span> ({{data.length}})</h4>
+      <!-- BLACK SQURE -->
+    </div>
+    <div class="right-side-btn">
+      <app-textbox [isSearch]="true" name="searchs" className="black-search-input-border-bottom" type="search"
+        [(ngModel)]="searchTxt" [value]="searchTxt" ngDefaultControl placeholder="Search Change Requests" (keyUp)="onFilter()"></app-textbox>
+
+      <div class="print-email-btn no-left-boder">
+        <a href="javascript:;" class="print-btn" (click)="print()">
+          <span class="print-icon"></span>
+          <span class="right-btn-txt">Print</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- SEARCH TABLE -->
+  <div class="main-search-table">
+    <div class="search-table">
+      <table>
+        <!-- THEAD -->
+        <thead>
+          <tr>
+            <!-- <th class="th-change-request-id no-print">
+              <span l10nTranslate>Change Request ID</span>
+            </th> -->
+            <th class="th-change-request-details">
+              <span l10nTranslate>Change Request Details</span>
+            </th>
+            <th class="th-standard-identifying">
+              <span l10nTranslate>Identifying #</span>
+            </th>
+            <th class="th-organization">
+              <span l10nTranslate>Organization</span>
+            </th>
+            <th class="th-requested-by">
+              <span l10nTranslate>Requested by</span>
+            </th>
+            <th class="th-email">
+              <span l10nTranslate>Email Address</span>
+            </th>
+            <th class="th-action no-print">
+              <span l10nTranslate>Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <!-- TBODY -->
+        <tbody>
+          <tr *ngFor="let data of data | paginate: paginate; let i = index;">
+            <!-- <td class="td-change-request-id no-print">
+              <span class="bold-content">#{{data.id}}</span>
+            </td> -->
+            <td class="td-change-request-details" [ngSwitch]="data.recordType">
+              <span *ngSwitchCase="'Division'" class="div-content">{{data.type === 'Insert' ? 'Create' : data.type}} {{data.pendingStandard.description ? 'Sub-Division' : 'Division'}}</span>
+              <span *ngSwitchCase="'Org'" class="div-content">{{data.type === 'Insert' ? 'Create' : data.type}} Organization</span>
+              <span *ngSwitchDefault class="div-content">{{changeRequestStatus[data.type]}}</span>
+            </td>
+            <td class="td-standard-identifying" [ngSwitch]="data.recordType">
+              <p class="desc-content" *ngSwitchCase="'Org'"></p>
+              <p class="desc-content" *ngSwitchDefault>{{data.pendingStandard.name}}</p>
+            </td>
+            <td class="td-organization" [ngSwitch]="data.recordType">
+              <span class="bold-content" *ngSwitchCase="'Division'"></span>
+              <span class="bold-content" *ngSwitchCase="'Org'">{{data.pendingStandard.name}}</span>
+              <span class="bold-content" *ngSwitchDefault>{{data.pendingStandard.organization.name}}</span>
+            </td>
+            <td class="td-requested-by">
+              <span class="idenfy-content">{{data.requestedUser.fullName}}</span>
+            </td>
+            <td class="td-email">
+              <a href="mailto:{{data.requestedUser.email}}" class="email-content">{{data.requestedUser.email}}</a>
+            </td>
+            <td class="td-action no-print">
+              <div class="write-del-icons">
+                <div class="hover-boxs" (click)="approve(data)">
+                  <span class="green-btn "></span>
+                  <span class="up-div" l10nTranslate>
+                    Approve
+                  </span>
+                </div>
+                <div class="hover-boxs reject-hover" (click)="reject(data)">
+                  <span class="red-btn "></span>
+                  <span class="up-div" l10nTranslate>
+                    Reject
+                  </span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

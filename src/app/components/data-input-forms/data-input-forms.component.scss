@@ -1,0 +1,150 @@
+@import "../../../assets/scss/base/_variables";
+// DATA INPUT NEW STANDARD
+.data-input-form-main {
+  padding-top: 25px;
+  margin: 0 -10px;
+}
+.required-field::after {
+  content: "*";
+  color: red;
+}
+.data-newStandardDivision-wrapper {
+  display: flex;
+  flex-direction: column;
+  .data-content {
+    .email-box {
+      height: 122px;
+    }
+    .tag-box {
+      height: 55px;
+      ::ng-deep {
+        .ng2-tag-input__text-input {
+          margin-top: 6px;
+        }
+      }
+    }
+  }
+}
+.grid-inputfield {
+  display: flex;
+  .col {
+    display: flex;
+    flex-direction: column;
+    width: 33.3%;
+    margin: 0 33px;
+    .data-content {
+    margin: 0 0 25px 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      .lbl-tilte {
+        font-size: 16px;
+        font-weight: 600;
+        color: $content-text-black;
+        margin: 0 0 6px 0;
+        line-height: 20px;
+      }
+    }
+
+    .data-btn {
+      margin-top: 100px;
+      display: flex;
+      justify-content: flex-end;
+      flex: 1;
+      align-items: flex-end;
+    }
+
+  }
+}
+
+// NEW STANDARD BTN
+.data-btn {
+  margin-top: 100px;
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+  align-items: flex-end;
+  .red-btn,
+  .border-btn {
+    margin: 0 13px 0 0;
+  }
+  .red-btn,
+  .border-btn,
+  .blue-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 115px;
+    height: 34px;
+    line-height: 35px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .red-btn,
+  .blue-btn {
+    border: none;
+  }
+  .border-btn {
+    width: 113px;
+    height: 32px;
+    line-height: 33px;
+  }
+}
+
+// CREATE-NEW-CS-WRAPPER
+.create-new-cs-wrapper {
+  .data-content {
+    margin: 0 0 25px 0;
+    .offensive-section {
+      .radio-btn-select {
+        .radio-select {
+          width: 101px;
+          height: 34px;
+          line-height: 35px;
+        }
+      }
+    }
+    .action-plan-radio {
+      .radio-btn-select {
+        .radio-select {
+          width: 53px;
+          height: 35px;
+        }
+      }
+    }
+    .tag-box {
+      height: 55px;
+      ::ng-deep {
+        .ng2-tag-input__text-input {
+          margin-top: 6px;
+        }
+      }
+    }
+  }
+}
+button {
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+// CREATE-DIVISION-WRAPPER
+/*
+.create-division-wrapper,
+.create-sub-div-wrapper {
+  .grid-inputfield {
+    min-height: 500px;
+  }
+}
+*/
+
+// MAKE ORGANIZATION DROPDOWN TO NOT OVERFLOW
+.col:nth-of-type(1) {
+  overflow-x: hidden;
+  padding: 0 5px;
+}
+
+.overflow-visible{
+  overflow: visible!important;
+}

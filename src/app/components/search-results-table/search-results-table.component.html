@@ -1,0 +1,151 @@
+<!-- SEARCH RESULT WRAPPER -->
+<div class="search-result-wrapper">
+  <!-- SEARCH TABLE TITLE -->
+  <div class="search-table-title no-print" #resultsTitle>
+    <div class="search-result-title">
+      <h4 *ngIf="data"><span l10nTranslate>keyWord.searchResult</span> ({{paginate.totalItems}})</h4>
+      <!-- BLACK SQURE -->
+    </div>
+    <div class="right-side-btn">
+      <div class="print-email-btn">
+        <a href="javascript:;" class="print-btn" (click)="print()">
+          <span class="print-icon"></span>
+          <span class="right-btn-txt">Print</span>
+        </a>
+        <!-- EMAIL BTN -->
+        <a href="javascript:;" (click)="sendMail()" class=" email-btn blue-btn" *ngIf="canSendEmail">
+          <span class="email-icon"></span>
+          <span class="right-btn-txt" l10nTranslate>Email</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- SEARCH TABLE -->
+  <div class="main-search-table">
+    <div class="search-table">
+      <table>
+        <!-- THEAD -->
+        <thead #resultsHeader>
+          <tr>
+            <th class="th-check no-print">
+              <div class="th-chkbox">
+                <app-checkbox [isChecked]="isThChk" value="new-full-name" (getChange)="thToggleCheck($event)" className="sm-checkbox"></app-checkbox>
+              </div>
+            </th>
+            <th class="th-idenfy">
+              <span l10nTranslate>Identifying #</span>
+            </th>
+            <th class="th-org">
+              <span l10nTranslate>Org</span>
+            </th>
+            <th class="th-desc">
+              <span l10nTranslate>Description</span>
+            </th>
+            <th class="th-div">
+              <span l10nTranslate>Div</span>
+            </th>
+            <th class="th-sub-div">
+              <span l10nTranslate>SubDiv</span>
+            </th>
+            <th class="th-prod">
+              <span l10nTranslate>ProductLine</span>
+            </th>
+            <th class="th-email">
+              <span l10nTranslate>Email Address</span>
+            </th>
+            <th class="th-criticl">
+              <span l10nTranslate>CriticalTableHeader</span>
+            </th>
+            <th class="th-comment">
+              <span l10nTranslate>Comments</span>
+            </th>
+            <th class="th-action no-print" *ngIf="isLoggedIn">
+              <span l10nTranslate>Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <!-- TBODY -->
+        <tbody *ngIf="data.length > 0">
+          <tr *ngFor="let item of data | paginate: paginate; let i = index;">
+            <td class="td-check no-print">
+              <app-checkbox [isChecked]="item.isChecked" value="new-full-name" (getChange)="changeCheckbox(i, $event)"></app-checkbox>
+            </td>
+            <td class="td-idenfy">
+              <span *ngIf="item.standard" class="idenfy-content">{{item.standard.name}}</span>
+            </td>
+            <td class="td-org">
+              <span *ngIf="item.standard" class="org-content">{{item.standard.organization.name}}</span>
+            </td>
+            <td class="td-desc">
+              <p *ngIf="item.standard" class="desc-content">{{item.standard.description}}</p>
+            </td>
+            <td class="td-div">
+              <span class="div-content">{{item.division.name}}</span>
+            </td>
+            <td class="td-sub-div">
+              <span class="sub-div-content" *ngIf="item.subDivision">{{item.subDivision.name}}</span>
+              <span class="sub-div-content" *ngIf="!item.subDivision">&nbsp;</span>
+            </td>
+            <td class="td-prod">
+              <p class="prod-content" *ngIf="item.productLine">{{item.productLine.name}}</p>
+              <p class="prod-content" *ngIf="!item.productLine">&nbsp;</p>
+            </td>
+            <td class="td-email">
+              <a *ngFor="let mail of item.firstThreeEmails" href="mailto:{{mail.contactEmail}}" class="email-content" >{{mail.contactEmail}}</a>
+              <a href="javascript:;" class="email-content" *ngIf="!item?.productLine?.productLineContacts">&nbsp;</a>
+              <a href="javascript:;" class="email-content more-email" (click)="openMore(i, $event)" *ngIf="item?.productLine?.productLineContacts.length > 3">
+                +{{item.productLine.productLineContacts.length - 3}} more
+              </a>
+              <!-- EMAIL TOOLTIP -->
+              <div class="email-tooltip-widget" [class.is-open]="activeIndex===i" (click)="$event.stopPropagation()">
+                <div class="email-tooltip-box">
+                  <div class="email-title">
+                    <h4>All Email Addresses</h4>
+                    <span class="close-icon" (click)="closeMore(-1, $event)"></span>
+                  </div>
+                  <!-- <div class="div-content">
+                    <span class="div-txt">Division : <span>EXD</span></span>
+                  </div> -->
+                  <div class="email-box-content">
+                    <a href="mailto:{{mailList.contactEmail}}" *ngFor="let mailList of item?.productLine?.productLineContacts | slice:3">
+                      <span>{{mailList.contactEmail}} </span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- EMAIL TOOLTIP END -->
+            </td>
+            <td class="td-criticl">
+              <span class="criticl-content" [class.no-txt]="!item.criticalToBusiness">
+                <ng-container *ngIf="item.criticalToBusiness">
+                  YES
+                </ng-container>
+                <ng-container *ngIf="!item.criticalToBusiness">
+                  NO
+                </ng-container>
+              </span>
+            </td>
+            <td class="td-comment">
+              <p class="comment-content">{{item.comment}}</p>
+            </td>
+            <td class="td-action no-print" *ngIf="isLoggedIn">
+              <div class="write-del-icons">
+                <a class="write-icon" [routerLink]="['/keyword-search/edit-standard/' + item.id]">
+                </a>
+                <span class="delete-icon" (click)="deleteRow(item)">
+                </span>
+                <a class="clone-icon" [routerLink]="['/keyword-search/edit-standard/' + item.id + '/clone']">
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="data.length === 0">
+          <tr>
+            <td colspan="15"><span l10nTranslate>keyWord.search.noDataFound</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

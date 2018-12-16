@@ -1,0 +1,72 @@
+<!-- LOGIN PAGE -->
+
+<div class="page-container login-page">
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="login-wrapper">
+      <div class="container-blue-top">
+        <span class="top-text">Eaton Codes & Standards</span>
+      </div>
+      <div class="login-container">
+        <div class="login-form-fields">
+          <h2 class="login-text">LOGIN</h2>
+          <!-- LOGIN-FORM -->
+          <div class="login-form">
+            <form (ngSubmit)="login()" #loginForm="ngForm">
+              <!-- USERNAME-INPUT -->
+              <div class="username-input">
+                <app-textbox
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  ngDefaultControl
+                  required
+                  [(ngModel)]="loginData.username"
+                  [value]="loginData.username"
+                  className="login-txt"
+                  [isSearch]="false"
+                ></app-textbox>
+              </div>
+              <!-- PASS-INPUT -->
+              <div class="pass-input">
+                <app-textbox
+                  type="password"
+                  name="password"
+                  ngDefaultControl
+                  required
+                  [(ngModel)]="loginData.password"
+                  [value]="loginData.password"
+                  placeholder="Password"
+                  className="login-txt"
+                  [isSearch]="false"
+                ></app-textbox>
+              </div>
+              <div class="errorLabelWrapper"><span class="errorLabel" *ngIf="showError">Username or Password incorrect</span></div>
+              <!-- LOGIN-BTN -->
+              <button class="blue-lt-btn login-btn" [disabled]="!loginForm.form.valid" type="submit">Login</button>
+              <!-- REMEMBER-CHK -->
+              <div class="remember-box">
+                <div class="Remember-chk">
+                  <app-checkbox
+                    label="Remember Me"
+                    [isChecked]="remember"
+                    (getChange)="onRememberMeChange($event)"
+                    value="remember-me"
+                    className="form-checkbox login-check"
+                  ></app-checkbox>
+                </div>
+                <!-- <a class="forget-link" href="javascript:;">Forgot Password</a> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+<!-- LOGIN PAGE END -->

@@ -1,0 +1,73 @@
+<!-- C S ISSUES PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container c-s-issues-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper no-print">
+    <app-header l10n-title title="csIssues.title" pageType="c-s-issues">
+    </app-header>
+    <!-- HEADER FILTERS -->
+    <div class="header-filter-area">
+      <div class="filter-grid-box">
+        <!-- STAND-ID-FILTER -->
+        <div class="col quick-search-filter">
+          <div class="filter-content">
+            <label l10nTranslate>Quick Search</label>
+            <div class="fields">
+              <app-textbox [isSearch]="true" name="searchs" className="black-search-input" type="search" [(ngModel)]="searchText"
+                [value]="searchText" ngDefaultControl placeholder="Search C&amp;S Issues" (keyUp)="getQueryResult()"></app-textbox>
+            </div>
+          </div>
+        </div>
+
+        <!-- DIVISIONS -->
+        <div class="col divisions-filter">
+          <div class="filter-content">
+            <label l10nTranslate>Region</label>
+            <div class="fields">
+              <app-dropdown [options]="regionOptions" (optSelect)="onSelect('regionSelected', $event)" [selected]="Any"></app-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB DIVISIONS -->
+        <div class="col sub-divisions-filter">
+          <div class="filter-content">
+            <label l10nTranslate>Division</label>
+            <div class="fields">
+              <app-dropdown [options]="divisionOptions" (optSelect)="onSelect('divisionSelected', $event)" [selected]="Any"></app-dropdown>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCT LINE -->
+      </div>
+    </div>
+  </div>
+  <!-- MAIN -->
+  <main class="main-content no-print">
+    <div class="c-s-issues-wrapper">
+      <app-c-s-issues-table [topData]="topResults" [data]="results" [totalRows]="paginationOptions.totalItems" [showReadAll]="showReadAll" (createdByMe)="showIssuesCreatedByMe($event)"
+        [paginate]="paginationOptions" (clickDelete)="setRowData($event);" (printing)="printAllCnsIssue()"></app-c-s-issues-table>
+      <div class="pagination-wrapper">
+        <app-pagination (goto)="setPage($event)" [paginate]="paginationOptions" (clickChangePageSize)="changePageSize($event)"
+          [showReadAll]="showReadAll" (readAll)="readAll()" *ngIf="paginationOptions.totalItems"></app-pagination>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+  <!-- PRINT -->
+  <div id="section-to-print" class="hidden-section">
+    <app-c-s-issues-table [topData]="topResults" [data]="allCnSIssues" [totalRows]="allPagination.totalItems" [showReadAll]="showReadAll" (createdByMe)="showIssuesCreatedByMe($event)"
+    [paginate]="allPagination" (clickDelete)="setRowData($event);" (printing)="printAllCnsIssue()"></app-c-s-issues-table>
+  </div>
+</div>
+<app-model (close)="isOpenModal=$event" *ngIf="isOpenModal" [rowData]="rowData" [modalType]="modalType"
+  [modalProperties]="modalProperties" (confirmDelete)="deleteCnsIssue($event)"></app-model>
+<!-- KEYWORD SEARCH PAGE END -->

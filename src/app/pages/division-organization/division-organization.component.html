@@ -1,0 +1,27 @@
+<!-- DATA INPUT PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container division-organization-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper">
+    <app-header l10n-title title="divisionOrganization.title" pageType="division-organization">
+    </app-header>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+      <div class="table-wrapper">
+        <app-navigation-tab class="navi-tab" tabType="division-organization" (toggleNav)="toggleForm($event)"></app-navigation-tab>
+        <app-division-table *ngIf="activeTab==1"></app-division-table>
+        <app-organization-table *ngIf="activeTab==2"></app-organization-table>
+      </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+<!-- DATA INPUT PAGE END -->

@@ -1,0 +1,16 @@
+// CHANGE REQUESTS PAGE
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+// CHANGE-REQUESTS-WRAPPER
+.change-requests-wrapper {
+  padding: 15px 20px 0 20px;
+}
+
+// PAGINATION-WRAPPER
+.pagination-wrapper {
+  padding: 25px 0 112px 0;
+}

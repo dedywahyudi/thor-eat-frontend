@@ -1,0 +1,11 @@
+// DATA INPUT PAGE
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+// DATA-INPUT-WRAPPER
+.data-input-wrapper {
+  padding: 27px 20px 0 20px;
+}

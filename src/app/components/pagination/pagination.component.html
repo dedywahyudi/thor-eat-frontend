@@ -1,0 +1,32 @@
+<!-- PAGINATION -->
+<pagination-template #p="paginationApi" [id]="paginate.id" (pageChange)="changePage($event)" maxSize="10">
+  <div class="per-page-selection">
+    <!-- <span class="read-all" *ngIf="showReadAll['shown']" (click)="readAllCheck()">Read All</span> -->
+    <label class="label">Results perpage :</label>
+    <div class="per-page-dropdown">
+      <app-dropdown [selected]="paginationOptions.defaultSelected" [options]="paginationOptions.perPageRecord"
+        (optSelect)="changePageSize($event)" className="pagination-dropdown" *ngIf="paginationOptions.perPageRecord">
+      </app-dropdown>
+    </div>
+  </div>
+  <div class="pagination-wrapper">
+    <ul class="pagination-box">
+      <li class="page-item" *ngIf="!p.isFirstPage()">
+        <a class="left-arrow-icon" (click)="p.previous()" href="javascript:;"></a>
+      </li>
+      <li class="page-item" *ngIf="p.isFirstPage()">
+        <a class="left-arrow-icon disabled" href="javascript:;"></a>
+      </li>
+      <li class="page-item" *ngFor="let page of p.pages; let i=index;" (click)="p.setCurrent(page.value)">
+        <a class="page-link" *ngIf="p.getCurrent() !== page.value" href="javascript:;">{{page.value}}</a>
+        <a class="page-link is-active" *ngIf="p.getCurrent() === page.value" href="javascript:;">{{page.value}}</a>
+      </li>
+      <li class="page-item" *ngIf="!p.isLastPage()">
+        <a class="right-arrow-icon" (click)="p.next()" href="javascript:;"></a>
+      </li>
+      <li class="page-item" *ngIf="p.isLastPage()">
+        <a class="right-arrow-icon disabled" href="javascript:;"></a>
+      </li>
+    </ul>
+  </div>
+</pagination-template>

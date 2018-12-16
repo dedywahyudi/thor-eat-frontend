@@ -1,0 +1,58 @@
+// PAGINATION-WRAPPER
+.pagination-wrapper {
+  padding: 25px 0 112px 0;
+}
+
+tr {
+  .arrow-flag {
+    width: 5%;
+  }
+  .td-division-id {
+    width: 20%;
+  }
+  .td-division-name {
+    width: 30%;
+  }
+  .td-division-region {
+    width: 35%
+  }
+  .th-action, td-action {
+    width: 10%;
+  }
+}
+
+.arrow-icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  &::after {
+    content: "";
+    display: flex;
+    width: 8px;
+    height: 12px;
+    // position: absolute;
+    background: url('../../../assets/i/up-arrow.svg') center center;
+    background-size: 8px 12px;
+  }
+}
+
+.down-arrow {
+  transform: rotate(180deg);
+}
+
+.sub-division-row td {
+  border-bottom: 1px solid #ddd;
+  background-color: #f7f7f7;
+}
+.blue-text {
+  color: #268dc8;
+  font-size: 14px;
+  font-weight: bold;
+
+}
+
+.odd-row td {background-color: #f7f7f7}

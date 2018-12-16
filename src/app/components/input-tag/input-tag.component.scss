@@ -1,0 +1,50 @@
+@import "../../../assets/scss/base/_variables";
+// SEND EMAIL WRAPPER
+.input-tag-wrapper {
+  border-radius: 3px;
+  background-color: #ffffff;
+  border: solid 1px #a2a2a2;
+  padding: 9px 15px 9px 9px;
+  height: 63px;
+  overflow-y: auto;
+  .input-box {
+    // TAG INPUT
+    .tag-input {
+      border: none;
+      font-size: 12px;
+      font-weight: 300;
+      color: $content-text-black;
+      padding: 0;
+      height: 22px;
+      outline: none;
+      width: 100%;
+    }
+    // TAG-TEXT
+    .tag-text {
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 600;
+      color: $content-text-white;
+      padding: 6px 0 5px 7px;
+      border-radius: 3px;
+      background-color: #268dc8;
+      margin-right: 4px;
+      margin-bottom: 3px;
+      .close-icon {
+        width: 10px;
+        height: 10px;
+        background: url('../../../assets/i/circle-close-blue.svg');
+        background-size: 10px 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  // DATA INPUT
+  &.data-input-email {
+    padding: 13px 15px 9px 9px;
+    height: 205px;
+  }
+}

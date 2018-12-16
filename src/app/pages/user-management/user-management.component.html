@@ -1,0 +1,38 @@
+<!-- USER MANAGEMENT PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container user-management-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper no-print">
+    <app-header l10n-title title="userManagement.title" pageType="user-management">
+    </app-header>
+  </div>
+  <!-- MAIN -->
+  <main class="main-content no-print">
+    <div class="user-management-wrapper">
+      <app-user-management-table [data]="results" (printing)="printAllUsers()" (adding)="openCreateUserModal($event)"
+        (editing)="modalType='edit-user';setRowData($event);" (deleting)="modalType='delete-user-row';setRowData($event);"
+        (getFilter)="getQueryResult($event)" [paginate]="paginationOptions"></app-user-management-table>
+      <div class="pagination-wrapper">
+        <app-pagination [paginate]="paginationOptions" (goto)="setPage($event)" (clickChangePageSize)="changePageSize($event)"
+          *ngIf="paginationOptions.totalItems"></app-pagination>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+  <!-- PRINT -->
+  <div id="section-to-print" class="hidden-section">
+    <app-user-management-table [data]="allUsers" (printing)="printAllUsers()" (adding)="openCreateUserModal($event)"
+      (editing)="modalType='edit-user';setRowData($event);" (deleting)="modalType='delete-user-row';setRowData($event);"
+      (getFilter)="getQueryResult($event)" [paginate]="allPagination"></app-user-management-table>
+  </div>
+</div>
+<app-model (close)="isOpenModal=$event" *ngIf="isOpenModal" [modalType]="modalType" [rowData]="rowData" (createUser)="addUser($event)"
+  [modalProperties]="modalProperties" (confirmDelete)="deleteUser($event)" (updateUser)="updateUser($event)"></app-model>
+<!-- KEYWORD SEARCH PAGE END -->

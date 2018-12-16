@@ -1,0 +1,30 @@
+// EDIT STANDARD PAGE
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+// EDIT-STANDARD-WRAPPER
+.edit-standard-wrapper {
+  padding: 27px 20px 0 20px;
+}
+
+// thumbnail
+.thumbnail {
+  margin-left: 23px;
+  margin-top: 8px;
+  li {
+    float: left;
+    .links {
+      font-size: 15px;
+      color: #282828;
+      margin-right: 5px;
+      &.current {
+        color: #268dc8;
+        font-weight: 600;
+        margin-right: 5px;
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<!-- STANDARD-AVAILABLE-DETAIL -->
+<div class="standard-available-detail">
+
+  <!-- STD-AVAIL-HEADER -->
+  <div class="std-avail-header">
+    <h2 class="std-avail-title1">{{activeStandard['name']}}</h2>
+    <h2 class="std-avail-title2">{{activeStandard['description']}} (EC)</h2>
+    <div class="detail-content">
+      <span class="detail-head" l10nTranslate>orgPage.Divisions-Standard:</span>
+      <p class="details-content-txt" l10nTranslate>
+        {{getImpactedDivisions()}} orgPage.div-std-para
+      </p>
+    </div>
+  </div>
+
+  <!-- STD-AVAIL-HEADER -->
+  <div class="std-avail-items-wrapper" *ngIf="tabId === activeTab" >
+    <ngx-masonry [options]="{ initLayout: true, transitionDuration: '0.0s' }">
+      <ngxMasonryItem class="masonry-item" *ngFor="let box of activeStandard['divisionsData']['boxList']">
+        <div class="inner-content">
+          <span class="widget-title">
+            <p>{{box.title}}</p>
+            <!-- <span class="count" *ngIf="getTotalContactsLength(box) !== 0">({{getTotalContactsLength(box)}})</span> -->
+          </span>
+          <div class="checkbox-container">
+            <div class="chk-group" *ngFor="let checkbox of box['checkboxList']; let i = index;">
+              <app-checkbox label="{{checkbox.checkLabel}}" [isChecked]="checkbox.checked" className="form-checkbox"
+                (getChange)="checkNumber(checkbox, box, $event)" [data]="checkbox" (getLabelClick)="clickLabel($event,i)"
+                [disabled]="true"></app-checkbox>
+                <!-- EMAIL TOOLTIP -->
+                <div class="email-tooltip-widget" [ngStyle]="{'top.px': popupY, 'left.px': popupX}" [class.is-open]="activeCheckId === checkbox.checkId" (click)="$event.stopPropagation()">
+                  <div class="email-tooltip-box">
+                    <div class="email-title">
+                      <h4>All Email Addresses</h4>
+                      <!--span class="close-icon" (click)="closeMore(-1, $event)"></span-->
+                    </div>
+                    <!--
+                    <div class="div-content">
+                      <span class="div-txt">Division : <span>EXD</span></span>
+                    </div>
+                    -->
+                    <div class="email-box-content">
+                      <a href="javascript:;" *ngFor="let mailList of getEmailList(checkbox)">
+                        <span>{{mailList}} </span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- EMAIL TOOLTIP END -->
+              <span class="checked-count-content" *ngIf="checkbox.checkNumber !== 0" (mouseenter)="showContacts(checkbox.checkId, $event)" (mouseleave)="hideContacts()" >{{checkbox.checkNumber}}</span>
+            </div>
+          </div>
+        </div>
+      </ngxMasonryItem>
+    </ngx-masonry>
+  </div>
+
+</div>
+<!-- STANDARD-AVAILABLE-DETAIL END -->

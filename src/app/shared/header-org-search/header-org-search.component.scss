@@ -1,0 +1,130 @@
+@import "../../../assets/scss/base/_variables";
+
+// HEADER-ORG-SEARCH
+.header-org-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 0;
+  height: 48px;
+
+  // HEADER-ORG-LEFT
+  .header-org-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    overflow-x: auto;
+
+    .add-std-btn {
+      display: none;
+    }
+
+    &.add-more-std {
+      .add-std-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 120px;
+        padding: 0;
+        height: 32px;
+        line-height: 33px;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 13px;
+        .plus-icon {
+          font-size: 19px;
+          margin-right: 5px;
+          margin-top: -1px;
+        }
+      }
+    }
+
+    .selected-list-nav {
+      ul {
+        display: flex;
+        height: 48px;
+        li {
+          display: flex;
+          height: 100%;
+          align-items: center;
+          padding: 0 17px;
+          margin: 0 4px;
+          position: relative;
+          cursor: pointer;
+          min-width: 105px;
+
+          .selected-list-txt {
+            font-size: 16px;
+            color: $content-text-black;
+            font-weight: 600;
+            margin-left: 6px;
+          }
+
+          .close-icon {
+            width: 12px;
+            height: 12px;
+            background: url('../../../assets/i/circle-close-grey.svg');
+            background-size: 12px 12px;
+            margin-top: -2px;
+            margin-left: 10px;
+            cursor: pointer;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 30px;
+            background-color: #cecece;
+            top: 9px;
+            right: -4px;
+          }
+
+          &.is-active {
+            &::before {
+              content: "";
+              position: absolute;
+              width: 100%;
+              height: 4px;
+              background-color: #268dc8;
+              width: 100%;
+              bottom: 0;
+              left: 0;
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  // SEND-EMAIL-BTN
+  .send-email-btn {
+    width: 120px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 3px;
+    line-height: 33px;
+    margin-left: 10px;
+    .mail-count {
+      margin-right: 2px;
+    }
+    .icon {
+      width: 17px;
+      height: 13px;
+      background: url('../../../assets/i/send-email.svg');
+      background-size: 17px 13px;
+      margin-right: 8px;
+    }
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+}

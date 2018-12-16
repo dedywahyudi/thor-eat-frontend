@@ -1,0 +1,34 @@
+<!-- STANDARDS-ORG-SEARCH PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container standard-org-search-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper">
+    <app-header l10n-title title="orgPage.title" [selectedEmailLength]="selectedEmailLength" [tabs]="tabs" (sendTab)="getTab($event)" (sendActive)="getActive($event)"
+      pageType="org-search">
+    </app-header>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <ng-container *ngFor="let tab of tabs; let i = index">
+      <div class="standard-org-search-wrapper" [class.is-active]="i===activeTab">
+        <div class="standard-org-left">
+          <app-standard-org-selection (standard)="selectDivision($event, i)" (changeOrganization)="resetSelection(i);" [tab]="tab"></app-standard-org-selection>
+        </div>
+        <div class="standard-org-right">
+          <app-recent-standards-list (standard)="selectActiveStandard($event)" [recentStandards]="recentStandards" *ngIf="!tab.activeStandard"></app-recent-standards-list>
+          <app-standard-available-detail [divisions]="divisions" [activeStandard]="tab.activeStandard" [tabId]="i" [activeTab]="activeTab" *ngIf="tab.activeStandard?.divisionsData && isLoaded"></app-standard-available-detail>
+        </div>
+      </div>
+    </ng-container>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+<!-- STANDARDS-ORG-SEARCH PAGE END -->

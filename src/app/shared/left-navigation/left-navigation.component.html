@@ -1,0 +1,70 @@
+<!--LEFT NAVIGATION  -->
+<div class="left-aside-widget no-print" [class.is-open]="isOpen" [class.is-close]="!isOpen" (click)="$event.stopPropagation">
+  <!-- MENU-LOGO BAR -->
+  <div class="menu-logo-bar">
+    <!-- MENU BAR -->
+    <div class="menu-bar" (click)="toggle($event)">
+      <span class="menu-icon"></span>
+    </div>
+    <a href="javascript:;" class="logo-bar">
+      <span class="logo-eaton"></span>
+    </a>
+  </div>
+  <!-- WELCOME BAR -->
+  <div class="welcome-bar" *ngIf="isLoggedIn">
+    <div class="welcome-box">
+      <span class="wel-txt">Welcome,</span>
+      <span class="user-txt">{{currentUser.fullName}}</span>
+      <span class="position-txt">{{currentUser.role.name}}</span>
+    </div>
+  </div>
+  <!-- NAVIGATION LIST -->
+  <nav class="nav-list">
+    <ul>
+      <li>
+        <a routerLink="/keyword-search" class="keyword-search" routerLinkActive="is-active">
+          <span class="key-search-icon"></span>
+          <span class="nav-txt">Keyword Search</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/standards-org-search" class="standards-org-search" routerLinkActive="is-active">
+          <span class="org-search-icon"></span>
+          <span class="nav-txt">Divisional Search</span>
+        </a>
+      </li>
+      <li *ngIf="currentUser">
+        <a routerLink="/data-input" class="data-input" routerLinkActive="is-active">
+          <span class="data-input-icon"></span>
+          <span class="nav-txt">Data Input</span>
+        </a>
+      </li>
+      <li *ngIf="currentUser">
+        <a routerLink="/c-s-issues" class="c-s-issues" routerLinkActive="is-active">
+          <span class="cs-issue-icon"></span>
+          <span class="nav-txt">C & S Issues</span>
+        </a>
+      </li>
+      <li *ngIf="currentUser && currentUser.role.name === 'Administrator'">
+        <a routerLink="/division-organization" routerLinkActive="is-active">
+          <span class="management-icon"></span>
+          <span class="nav-txt">Data Management</span>
+        </a>
+      </li>
+      <li *ngIf="currentUser && currentUser.role.name === 'Administrator'">
+        <a routerLink="/user-management" routerLinkActive="is-active">
+          <span class="management-icon"></span>
+          <span class="nav-txt">User Management</span>
+        </a>
+      </li>
+      <li *ngIf="currentUser && (currentUser.role.name === 'AdminApprover' || currentUser.role.name === 'Administrator')">
+        <a routerLink="/change-requests" routerLinkActive="is-active">
+          <span class="request-icon"></span>
+          <span class="nav-txt">Change Requests</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- NAVIGATION LIST END -->
+</div>
+<!-- LEFT ASIDE END -->

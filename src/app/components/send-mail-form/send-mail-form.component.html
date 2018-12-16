@@ -1,0 +1,120 @@
+<!-- SEND EMAIL WRAPPER  -->
+<div class="send-email-wrapper">
+  <form class="grid-email-box" #mailForm="ngForm">
+    <div class="col">
+      <div class="form-content">
+        <label class="lbl-tilte required" l10nTranslate>sendEmail.From</label>
+        <div class="from-box">
+          <app-textbox type="email" name="firstName" placeholder='username@eaton.com' [isSearch]=false
+          [value]="mailFrom" [(ngModel)]="mailFrom" required ngDefaultControl></app-textbox>
+        </div>
+      </div>
+      <div class="form-content">
+        <label class="lbl-tilte required" l10nTranslate>sendEmail.Recepients</label>
+        <div class="recepients-box">
+          <tag-input
+            [(ngModel)]="mailModel.to"
+            [addOnBlur]=true
+            name="mail"
+            (onAdd)="onRecipientsAdded($event)"
+            (onRemove)="onRecipientsRemoved($event)"
+            [errorMessages]="errorMessages"
+            [validators]="emailValidators"
+          ></tag-input>
+        </div>
+      </div>
+      <div class="form-content">
+        <label class="lbl-tilte">CC/BCC</label>
+        <div class="cc-box">
+          <app-textbox type="email" name="cc" placeholder='Enter email ID' [isSearch]=false [(ngModel)]="mailModel.cc"
+            [value]="mailModel.cc" ngDefaultControl></app-textbox>
+        </div>
+      </div>
+      <div class="form-content">
+        <label class="lbl-tilte required" l10nTranslate>sendEmail.Subject</label>
+        <div class="subject-box">
+          <app-textbox type="text" name="firstName" placeholder="Type subject here" [isSearch]=false [(ngModel)]="mailModel.subject"
+            required [value]="mailModel.subject" ngDefaultControl></app-textbox>
+        </div>
+      </div>
+      <div class="form-content">
+        <label class="lbl-tilte required" l10nTranslate>Description</label>
+        <div class="description-box">
+          <quill-editor placeholder="Type Description here" [modules]="customOptions" [(ngModel)]="mailModel.body"
+           name="body" required ngDefaultControl></quill-editor>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="email-table" *ngIf="!hideStandardSelected">
+        <span class="tab-txt">Standards selected</span>
+        <!-- TABLE  -->
+        <table>
+          <thead>
+            <tr>
+              <th class="th-index-box">
+                <span l10nTranslate>Index</span>
+              </th>
+              <th class="th-org-box">
+                <span l10nTranslate>Org</span>
+              </th>
+              <th class="th-idenfy-box">
+                <span l10nTranslate>Identifying #</span>
+              </th>
+              <th class="th-id-box">
+                <span>ID</span>
+              </th>
+              <th class="th-div-box">
+                <span l10nTranslate>Div</span>
+              </th>
+              <th class="th-act-box">
+                <span l10nTranslate>sendEmail.Action</span>
+              </th>
+            </tr>
+          </thead>
+          <!-- TBODY  -->
+          <tbody>
+            <tr *ngFor="let item of standardsSelected;let i = index">
+              <td class="td-index-box">
+                <span>{{i + 1}}</span>
+              </td>
+              <td class="td-org-box">
+                <div class="org-td">
+                  <span *ngIf="!item['newAdded']">{{item.organization?.name}}</span>
+                  <app-dropdown *ngIf="item['newAdded']" [options]="organizationOptions" (optSelect)="onSelectOrg(item,$event)"
+                    required placeholder="Select" className="single-dropdown"></app-dropdown>
+                </div>
+              </td>
+              <td class="td-idenfy-box">
+                <span *ngIf="!item['newAdded']">{{item.name}}</span>
+                <app-dropdown *ngIf="item['newAdded']" [options]="item.stOptions" (optSelect)="onSelect(item, $event)"
+                  required placeholder="Select" className="single-dropdown"></app-dropdown>
+              </td>
+              <td class="td-id-box">
+                <span>{{item['id']}}</span>
+              </td>
+              <td class="td-div-box">
+                <span>{{item['division']}}</span>
+              </td>
+              <td class="td-act-box">
+                <span class="action-icon" (click)="removeItem(i)">
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- CANCEL-SEND-BTN  -->
+      <a href="javascript:;" class="add-btn blue-btn" l10nTranslate (click)="addItem()" *ngIf="!hideStandardSelected">
+        <span class="plus-icon">+</span>
+        sendEmail.Add-more
+      </a>
+      <div class="cancel-send-btn">
+        <a href="javascript:;" class="border-btn" l10nTranslate (click)="clickCancel()">Cancel</a>
+        <button href="javascript:;" [disabled]="!mailForm.form.valid || !mailModel.to.length" class="blue-btn" l10nTranslate (click)="clickSend()">
+          Send
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

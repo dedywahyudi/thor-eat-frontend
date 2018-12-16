@@ -1,0 +1,19 @@
+<!-- DATE PICKER -->
+<div class="date-picker-wrapper {{className}}">
+  <label>
+    <span class="date-icon" *ngIf="isDate"></span>
+    <input
+      [type]="type"
+      class="text-input-box"
+      [(ngModel)]="value"
+      [placeholder]="placeholder"
+      [owlDateTimeTrigger]="dt3"
+      [owlDateTime]="dt3"
+      [name]="name"
+    >
+    <owl-date-time [pickerType]="'calendar'" 
+      panelClass="{{isSendMail === true ? 'calendar-mail' : 'calendar'}}" #dt3 (afterPickerClosed)="getDate($event)"></owl-date-time>
+    <!-- {{value}} -->
+  </label>
+</div>
+<!-- DATE PICKER END -->

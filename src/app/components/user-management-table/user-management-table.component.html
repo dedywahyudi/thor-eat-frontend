@@ -1,0 +1,75 @@
+<!-- SEARCH RESULT WRAPPER -->
+<div class="search-result-wrapper">
+  <!-- SEARCH TABLE TITLE -->
+  <div class="search-table-title no-print">
+    <div class="search-result-title">
+      <h4 *ngIf="data"><span l10nTranslate>userManagement.tableTitle</span> ({{data.length}})</h4>
+      <!-- BLACK SQURE -->
+    </div>
+    <div class="right-side-btn">
+      <app-textbox [isSearch]="true" name="searchs" className="black-search-input-border-bottom" type="search"
+        [(ngModel)]="searchTxt" [value]="searchTxt" ngDefaultControl placeholder="Search Users" (keyUp)="onFilter()"></app-textbox>
+      <div class="print-email-btn no-left-boder">
+        <a href="javascript:;" class="print-btn" (click)="print()">
+          <span class="print-icon"></span>
+          <span class="right-btn-txt">Print</span>
+        </a>
+        <a href="javascript:;" class="add-btn blue-btn" (click)="addRow()">
+          <span class="right-btn-txt">Create New User</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- SEARCH TABLE -->
+  <div class="main-search-table">
+    <div class="search-table">
+      <table>
+        <!-- THEAD -->
+        <thead>
+          <tr>
+            <th class="th-username">
+              <span l10nTranslate>Username</span>
+            </th>
+            <th class="th-role">
+              <span l10nTranslate>Role</span>
+            </th>
+            <th class="th-fullname">
+              <span l10nTranslate>Name</span>
+            </th>
+            <th class="th-email">
+              <span l10nTranslate>Email Address</span>
+            </th>
+            <th class="th-action no-print">
+              <span l10nTranslate>Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <!-- TBODY -->
+        <tbody>
+          <tr *ngFor="let item of data | paginate: paginate; let i = index;">
+            <td class="td-username">
+              <span class="bold-content">{{item.username}}</span>
+            </td>
+            <td class="td-role">
+              <span class="bold-content">{{item.role.name}}</span>
+            </td>
+            <td class="td-fullname">
+              <span class="bold-content">{{item.fullName}}</span>
+            </td>
+            <td class="td-email">
+              <a href="mailto:{{item.email}}" class="email-content">{{item.email}}</a>
+            </td>
+            <td class="td-action no-print">
+              <div class="write-del-icons">
+                <a class="write-icon" (click)="editRow(item)">
+                </a>
+                <span class="delete-icon" (click)="deleteRow(item)">
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

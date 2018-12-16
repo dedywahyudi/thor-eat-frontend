@@ -1,0 +1,18 @@
+<!-- TIME PICKER -->
+<div class="time-picker-wrapper {{className}}">
+  <label>
+    <span class="time-icon" *ngIf="isTime"></span>
+    <input
+      [type]="type"
+      class="text-input-box"
+      [(ngModel)]="value"
+      [name]="name"
+      [placeholder]="placeholder"
+      [owlDateTimeTrigger]="dt4"
+      [owlDateTime]="dt4"
+      (dateTimeInput)="getTime($event)"
+    >
+    <owl-date-time [pickerType]="'timer'" panelClass="timer"  #dt4></owl-date-time>
+  </label>
+</div>
+<!-- TIME PICKER END -->

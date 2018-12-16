@@ -1,0 +1,27 @@
+@import "../../../assets/scss/base/_variables";
+
+// FOOTER
+.footer {
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+    background-color: #ffffff;
+    box-shadow: 0px -3px 3px 0 rgba(1, 2, 2, 0.05);
+    padding: 0 27px;
+    position: relative;
+    z-index: 12;
+    p {
+      font-size: 14px;
+      color: $content-text-black;
+      a{
+        color: $link-text-blue;
+      }
+    }
+  }
+}
+
+app-footer {
+  width: 100%;
+}

@@ -1,0 +1,17 @@
+<!-- TEXTBOX -->
+<div class="textbox-wrapper {{className}} ">
+  <span class="search-icon" *ngIf="isSearch"></span>
+  <input
+    [type]="!hasShowPassword ? type: (showPassword ? 'text': 'password')"
+    [name]="name"
+    (search)="search()"
+    class="text-input-box"
+    [placeholder]="placeholder"
+    (keyup)="onKey($event)"
+    [(ngModel)]="value"
+    [attr.maxLength]="maxLength"
+    [readonly]="readOnly"
+  >
+  <button (click)="showHidePassword()" *ngIf="hasShowPassword">{{showPassword ? 'Hide':'Show'}}</button>
+</div>
+<!-- TEXTBOX END -->

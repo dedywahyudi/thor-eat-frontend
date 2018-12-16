@@ -1,0 +1,38 @@
+@import "../../../assets/scss/base/_variables";
+// HEADER-DATA-INPUT
+.navigation-tab {
+  .nav-tab {
+    display: flex;
+    background: rgb(38, 141, 200);
+    ul {
+      display: flex;
+      height: 34px;
+      li {
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 0 20px;
+        border-right: 1px solid rgb(23, 109, 158);
+        font-size: 16px;
+        color: $content-text-white;
+        font-weight: 600;
+        opacity: .6;
+        cursor: pointer;
+        // ACTIVE
+        &.is-active {
+          background-color: rgb(23, 109, 158);
+          opacity: 1;
+          &:before {
+            content: "";
+            position: absolute;
+            height: 2px;
+            background-color: #fff;
+            width: 100%;
+            bottom: 1px;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+}

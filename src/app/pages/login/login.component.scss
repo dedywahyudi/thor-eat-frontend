@@ -1,0 +1,106 @@
+@import "../../../assets/scss/base/_variables";
+// LOGIN PAGE
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #efefef;
+}
+
+// LOGIN CONTAINER
+.login-wrapper{
+  background-color: #efefef;
+  padding-bottom: 20px;
+  .container-blue-top{
+    height: 372px;
+    background-color: #004898;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    .top-text{
+      color: $content-text-white;
+      font-size: 38px;
+      padding: 106px 0 0 0;
+    }
+  }
+  .login-container{
+    display: flex;
+    width: 333px;
+    border-radius: 8px;
+    background-color: #fff;
+    margin: -167px auto 0 auto;
+    position: relative;
+    z-index: 2;
+    .login-form-fields{
+      width: 100%;
+      padding: 0 52px;
+      .login-text{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 21px;
+        position: relative;
+        padding: 46px 0 0 0;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 35px;
+          height: 2px;
+          background-color: #000;
+          left: 0;
+          right: 0;
+          margin: auto;
+          bottom: -7px;
+        }
+      }
+      // LOGIN-FORM
+      .login-form{
+        margin-top: 57px;
+        .username-input {
+          margin-bottom: 15px;
+        }
+        // LOGIN-BTN
+        .login-btn{
+          height: 47px;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 20px 0px 0px 0px;
+          width: 100%;
+          border: none;
+          font-size: 14px;
+          outline: none;
+          cursor: pointer;
+          &:disabled {
+            cursor: default;
+            opacity: 0.5;
+          }
+        }
+      }
+
+      // REMEMBER-BOX
+      .remember-box{
+        display: flex;
+        margin-top: 20px;
+        align-items: center;
+        padding-bottom: 40px;
+        justify-content: space-between;
+        .forget-link{
+          font-size: 14px;
+          color: $content-text-black;
+        }
+      }
+    }
+  }
+}
+.errorLabelWrapper {
+  position: relative;
+  top: 10px;
+  .errorLabel {
+    font-size: 12px;
+    color: #ff0404;
+    font-weight: 300;
+  }
+}

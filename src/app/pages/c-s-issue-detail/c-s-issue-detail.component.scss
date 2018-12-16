@@ -1,0 +1,118 @@
+// C S ISSUE DETAIL PAGE
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+// C-S-ISSUE-DETAIL-WRAPPER
+.c-s-issue-detail-wrapper {
+  padding: 27px 20px 0 20px;
+}
+
+.main-content {
+  background-color: #f5f5f5;
+}
+
+// .top-area
+.top-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .thumbnail {
+    li {
+      float: left;
+      .links {
+        font-size: 15px;
+        color: #282828;
+        &.current {
+          color: #268dc8;
+          font-weight: 600;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .print-email-btn {
+    border-left: 0;
+    .print-btn {
+      padding: 0 12px;
+      border-radius: 4px;
+      margin-right: 10px;
+      background-color: #fff;
+    }
+    .email-btn {
+      .email-icon {
+        background: url('../../../assets/i/active-email.svg') center center no-repeat;
+        background-size: 11px auto;
+      }
+    }
+  }
+}
+
+// .row
+.row {
+  margin: 0 -8px;
+  display: flex;
+  margin-top: 16px;
+  .col {
+    float: left;
+    padding: 0 8px;
+    flex: 16.66666666%;
+    .boxs {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      overflow: hidden;
+      .label-txt {
+        margin-bottom: 8px;
+        font-size: 12px;
+        display: block;
+      }
+      .value-txt {
+        font-size: 18px;
+        color: #282828;
+        font-weight: 600;
+      }
+      &.status-box {
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          left: -20px;
+          top: -19px;
+          display: block;
+          width: 0;
+          height: 0;
+          border-width: 18px;
+          border-style: solid;
+          transform: rotate(134deg);
+        }
+        &.color-1 {
+          &:before {
+            border-color: #f92525 transparent transparent transparent;
+          }
+        }
+        &.color-2 {
+          &:before {
+            border-color: #ffaa23 transparent transparent transparent;
+          }
+        }
+        &.color-3 {
+          &:before {
+            border-color: #10c15b transparent transparent transparent;
+          }
+        }
+        .red-txt {
+          color: #f92525;
+        }
+        .orange-txt {
+          color: #ffaa23;
+        }
+        .green-txt {
+          color: #10c15b;
+        }
+      }
+    }
+  }
+}

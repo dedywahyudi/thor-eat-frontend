@@ -1,0 +1,702 @@
+<div class="data-input-form-main">
+
+  <!--  DATA INPUT NEW STANDARD  -->
+  <div class="data-newStandardDivision-wrapper" *ngIf="activeTab === 1 && isLoaded">
+    <form (ngSubmit)="onSubmit()" #newStandardDivisionForm="ngForm">
+      <div class="grid-inputfield">
+        <div class="col overflow-visible">
+          <!-- DATA CONTENT -->
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Identifying-No</label>
+            <div class="identifying-box">
+              <app-textbox
+                [(ngModel)]="newStandardDivision.standard.name"
+                [value]="newStandardDivision.standard.name"
+                ngDefaultControl
+                type="text"
+                name="standardName"
+                placeholder='Enter here'
+                [isSearch]=false
+                className="data-input-fields"
+                required
+              ></app-textbox>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte" l10nTranslate>Edition</label>
+            <div class="org-box">
+              <app-textbox
+                type="text"
+                name="edition"
+                [(ngModel)]="newStandardDivision.standard.edition"
+                [value]="newStandardDivision.standard.edition"
+                ngDefaultControl
+                placeholder='Enter here'
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>Org</label>
+            <div class="div-box">
+              <app-dropdown
+                [options]="organizations"
+                required
+                name="standardOrg"
+                (optSelect)="changeOrganizationStandard($event)"
+                [selected]="newStandardDivision.standard?.organization?.name"
+                placeholder="{{isEditedMode ? '' : 'Select'}}"
+                className="data-input-fields"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>Description</label>
+            <div class="desc-box">
+              <app-textbox
+                type="text"
+                name="description"
+                [(ngModel)]="newStandardDivision.standard.description"
+                [value]="newStandardDivision.standard.description"
+                ngDefaultControl
+                required
+                placeholder='Enter here'
+                [maxLength]="100"
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>Critical</label>
+            <div class="critical-section">
+              <label class="radio-btn-select">
+                <input type="radio" [(ngModel)]="newStandardDivision.criticalToBusinessShown"
+                ngDefaultControl name="critical-radio" value="YES" required checked="checked">
+                <span class="radio-select">YES</span>
+              </label>
+              <label class="radio-btn-select">
+                <input type="radio" [(ngModel)]="newStandardDivision.criticalToBusinessShown"
+                ngDefaultControl name="critical-radio" required value="NO">
+                <span class="radio-select">NO</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>Div</label>
+            <div class="div-box">
+              <app-dropdown
+                [options]="divisionOptions"
+                required
+                (optSelect)="onStandardSelect('division.id', $event)"
+                [selected]="newStandardDivision.division.name"
+                placeholder="{{isEditedMode ? '' : 'Select'}}"
+                className="data-input-fields"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>SubDiv</label>
+            <div class="sub-div-box">
+              <app-dropdown
+                required
+                [options]="subDivisionOptions"
+                (optSelect)="onStandardSelect('subDivision.id', $event)"
+                [selected]="newStandardDivision.subDivision.name"
+                placeholder="{{isEditedMode ? '' : 'Select'}}"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte  required-field" l10nTranslate>ProductLine</label>
+            <div class="tag-box">
+              <tag-input
+                [(ngModel)]='productLine'
+                [addOnBlur]=true
+                (onAdd)="onItemAdded('productLine', $event)"
+                (onRemove)="onItemRemoved('productLine', $event)"
+                name="productLine"
+                displayBy="value"
+                required
+              ></tag-input>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte  required-field" l10nTranslate>ProductLineEmail</label>
+            <div class="email-box">
+              <tag-input
+                [(ngModel)]='productLineContacts'
+                [addOnBlur]=true
+                (onAdd)="onItemAdded('newStandardDivision.productLineContact', $event)"
+                (onRemove)="onItemRemoved('newStandardDivision.productLineContact', $event)"
+                (onValidationError)="onValidationError($event)"
+                [validators]="emailValidators"
+                [errorMessages]="errorMessages"
+                name="email"
+                required
+              ></tag-input>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.nameOfStandardMail</label>
+            <div class="email-box">
+              <tag-input
+                [(ngModel)]='newStandardDivision.standardParticipant'
+                [addOnBlur]=true
+                (onAdd)="onItemAdded('newStandardDivision.standardParticipant', $event)"
+                (onRemove)="onItemRemoved('newStandardDivision.standardParticipant', $event)"
+                (onValidationError)="onValidationError($event)"
+                [validators]="emailValidators"
+                [errorMessages]="errorMessages"
+                name="standardParticipant"
+                required
+              ></tag-input>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte" l10nTranslate>Comments</label>
+            <div class="comd-box">
+              <app-textarea
+                name="lastName"
+                placeholder="Write here"
+                className="login-txt"
+                [(ngModel)]="newStandardDivision.comment"
+                [value]="newStandardDivision.comment"
+                ngDefaultControl
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textarea>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte"l10nTranslate>dataInput.date</label>
+            <div class="index-box">
+              <app-date-picker
+                placeholder="MM/DD/YYYY"
+                name="standardDate"
+                [value]="newStandardDivision.date"
+                type="text"
+                [isDate]=false
+                (dateTimeChange)="getDate('standardDate',$event);"
+              ></app-date-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="data-btn">
+        <a href="javascript:;" class="border-btn" l10nTranslate
+           *ngIf="!isEditedMode" (click)="cancel(newStandardDivisionForm)">
+          Reset
+        </a>
+        <a [routerLink]="['/keyword-search']" class="border-btn" l10nTranslate
+           *ngIf="isEditedMode">
+          Cancel
+        </a>
+        <button [disabled]="!newStandardDivisionForm.form.valid || !newStandardDivision.standard.organization.id || !newStandardDivision.division.id || !newStandardDivision.subDivision.id" type="submit" class="blue-btn">Submit</button>
+      </div>
+    </form>
+  </div>
+  <!--  DATA INPUT NEW STANDARD END -->
+
+  <!--  CREATE NEW C&S ISSUE  -->
+  <div class="create-new-cs-wrapper" *ngIf="activeTab === 2 && isLoaded">
+    <form (ngSubmit)="onSubmit()" #newCnsIssueForm="ngForm">
+      <div class="grid-inputfield">
+        <div class="col">
+          <!-- DATA CONTENT -->
+          <div class="data-content">
+              <label class="lbl-tilte required-field" l10nTranslate>Creator Name</label>
+              <div class="index-box" *ngIf="currentUser && currentUser.role.name !== 'Administrator'">
+                <span class="user-txt">{{newCnSissue.createdBy || newCnSissue.creatorName}}</span>
+              </div>
+              <app-textbox
+                *ngIf="currentUser && currentUser.role.name === 'Administrator'"
+                ngDefaultControl
+                [(ngModel)]="newCnSissue.createdBy"
+                [value]="newCnSissue.createdBy"
+                type="text"
+                name="creatorName"
+                placeholder='Enter Creator Name here'
+                required
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+          </div>
+          <div class="data-content">
+              <label class="lbl-tilte">Standard Organization</label>
+                <div class="std-org-box">
+                    <app-dropdown
+                      [options]="organizations"
+                      (optSelect)="onOrganizationGetStandards($event)"
+                      [selected]="newCnSissue.organization"
+                      ngDefaultControl
+                      placeholder="{{isEditedMode? newCnSissue.organization.name :'Select'}}"
+                      name="standardId"
+                      className="standard-dropdown"
+                    ></app-dropdown>
+                </div>
+            </div>
+            <div class="data-content">
+                <label class="lbl-tilte" l10nTranslate>orgPage.Standard</label>
+                <div class="std-org-box">
+                    <app-dropdown
+                      [options]="standardOptions"
+                      (optSelect)="onSelectCnS('standardId', $event)"
+                      ngDefaultControl
+                      placeholder="{{isEditedMode? newCnSissue?.standard?.name :'Select'}}"
+                      name="standardId"
+                      placeholder="Select Standard Organization"
+                      className="standard-dropdown"
+                    ></app-dropdown>
+              </div>
+            </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>Division</label>
+            <div class="available-box">
+              <app-dropdown
+                [options]="divisionOptions"
+                (optSelect)="onSelectCnS('division', $event, newCnsIssueForm)"
+                [selected]="newCnSissue?.division?.name"
+                ngDefaultControl
+                placeholder="{{isEditedMode ? newCnSissue?.division?.name : 'Select'}}"
+                name="divisionId"
+                required
+                className="data-input-fields"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Description-Initiative</label>
+            <div class="desc-text-box">
+              <app-textarea
+                name="lastName"
+                placeholder="Write here"
+                className="login-txt"
+                required
+                [(ngModel)]="newCnSissue.description"
+                [value]="newCnSissue.description"
+                ngDefaultControl
+                [isSearch]=false
+                [value]="lastName"
+                [maxLength]="500"
+                className="data-input-fields"
+              ></app-textarea>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Action-Plan</label>
+            <div class="plan-box">
+              <app-textarea
+                name="lastName"
+                [(ngModel)]="newCnSissue.actionPlan"
+                [value]="newCnSissue.actionPlan"
+                ngDefaultControl
+                placeholder="Write here"
+                required
+                className="login-txt"
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textarea>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.VP/GM Name</label>
+            <div class="index-box">
+              <app-textbox
+                ngDefaultControl
+                [(ngModel)]="newCnSissue.vpgmName"
+                [value]="newCnSissue.vpgmName"
+                type="text"
+                name="firstName"
+                placeholder='Enter Name here'
+                required
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Person-Plan</label>
+            <div class="tag-box">
+              <tag-input
+                [(ngModel)]='newCnSissue.personsResponsible'
+                [addOnBlur]=true
+                (onAdd)="onItemAdded('personsResponsible', $event)"
+                (onRemove)="onItemRemoved('personsResponsible', $event)"
+                name="newCnSissue.personsResponsible"
+                required
+              ></tag-input>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Estimated-Action Plan</label>
+            <div class="index-box">
+              <app-date-picker
+                placeholder="{{isEditedMode ? getDateStr(newCnSissue.estimatedCompletionDate) : 'MM/DD/YYYY'}}"
+                required
+                name="estimatedCompletionDate"
+                type="text"
+                [isDate]=false
+                [value]="newCnSissue.estimatedCompletionDate"
+                (dateTimeChange)="getDate('estimatedCompletionDate',$event);"
+              ></app-date-picker>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Date-reviewed</label>
+            <div class="index-box">
+              <app-date-picker
+                placeholder="{{isEditedMode ? getDateStr(newCnSissue.engineerReviewDate) : 'MM/DD/YYYY'}}"
+                required
+                name="engineerReviewDate"
+                [value]="newCnSissue.engineerReviewDate"
+                type="text"
+                [isDate]=false
+                (dateTimeChange)="getDate('engineerReviewDate',$event);"
+              ></app-date-picker>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Engineering-Leader-Name</label>
+            <div class="index-box">
+              <app-textbox
+                type="text"
+                name="firstName"
+                ngDefaultControl
+                [(ngModel)]="newCnSissue.engineerLeader"
+                [value]="newCnSissue.engineerLeader"
+                required
+                placeholder='Enter First Name, Last Name'
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Financial-Impact</label>
+            <div class="index-box">
+              <app-textbox
+                type="text"
+                name="firstName"
+                ngDefaultControl
+                [(ngModel)]="newCnSissue.financialImpact"
+                [value]="newCnSissue.financialImpact"
+                placeholder='Enter here'
+                required
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>Summary 'explanation' of the impact</label>
+            <div class="index-box">
+              <app-textarea
+                name="lastName"
+                [(ngModel)]="newCnSissue.impactSummary"
+                [value]="newCnSissue.impactSummary"
+                ngDefaultControl
+                placeholder="Write here"
+                required
+                className="login-txt"
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textarea>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.leadership-para</label>
+            <div class="action-plan-radio">
+              <label class="radio-btn-select">
+                <input type="radio" name="action-plan-radio" value="YES" checked="checked"  required [(ngModel)]="newCnSissue.criticalRoleLeadership">
+                <span class="radio-select">YES</span>
+              </label>
+              <label class="radio-btn-select">
+                <input type="radio" name="action-plan-radio" value="NO" required [(ngModel)]="newCnSissue.criticalRoleLeadership">
+                <span class="radio-select">NO</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Offensive-or-Defensive</label>
+            <div class="offensive-section">
+              <label class="radio-btn-select">
+                <input type="radio" name="offensive-radio" value="OFFENSIVE" required [(ngModel)]="newCnSissue.offensiveDefensive" checked="checked">
+                <span class="radio-select"l10nTranslate>dataInput.Offensive</span>
+              </label>
+              <label class="radio-btn-select">
+                <input type="radio" name="offensive-radio" value="DIFFENSIVE" required [(ngModel)]="newCnSissue.offensiveDefensive">
+                <span class="radio-select"l10nTranslate>dataInput.DIFFENSIVE</span>
+              </label>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte"l10nTranslate>dataInput.partners-needed</label>
+            <div class="index-box">
+              <app-textbox
+                type="text"
+                ngDefaultControl
+                [(ngModel)]="newCnSissue.externalPartners"
+                [value]="newCnSissue.externalPartners"
+                name="firstName"
+                placeholder='Enter here'
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Date the C&S Score-para</label>
+            <div class="index-box">
+              <app-date-picker
+                placeholder="{{isEditedMode ? getDateStr(newCnSissue.vpgmReviewDate) : 'MM/DD/YYYY'}}"
+                (dateTimeChange)="getDate('vpgmReviewDate',$event);"
+                [value]="newCnSissue.vpgmReviewDate"
+                type="text"
+                name="estimatedCompletionDate"
+                [isDate]=false
+                required
+              ></app-date-picker>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.C&S Priority number</label>
+            <div class="index-box">
+              <app-dropdown
+                required
+                ngDefaultControl
+                name="firstName"
+                [options]="priorityOptions"
+                (optSelect)="onPriorityChange($event)"
+                [selected]="newCnSissue.priority"
+                placeholder="{{isEditedMode? newCnSissue.priority :'Select'}}"
+                className="data-input-fields"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>dataInput.Region or Group</label>
+            <div class="std-org-box">
+              <app-dropdown
+                required
+                ngDefaultControl
+                name="estimatedCompletionDate"
+                [options]="regionOptions"
+                (optSelect)="onSelectCnS('region', $event)"
+                [selected]="newCnSissue.region"
+                placeholder="{{isEditedMode? newCnSissue.region :'Select'}}"
+                className="data-input-fields"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte" l10nTranslate>dataInput.Road Map-ques</label>
+            <div class="index-box">
+              <app-textbox
+                [(ngModel)]="newCnSissue.roadmapAlignment"
+                [value]="newCnSissue.roadmapAlignment"
+                type="text"
+                ngDefaultControl
+                name="firstName"
+                placeholder='Enter here'
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textbox>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field" l10nTranslate>Description of Succession Plan for Critical roles</label>
+            <div class="index-box">
+              <app-textarea
+                name="lastName"
+                [(ngModel)]="newCnSissue.successionPlan"
+                [value]="newCnSissue.successionPlan"
+                ngDefaultControl
+                placeholder="Write here"
+                required
+                [maxLength]="100"
+                className="login-txt"
+                [isSearch]=false
+                className="data-input-fields"
+              ></app-textarea>
+            </div>
+          </div>
+       </div>
+      </div>
+      <div class="data-btn">
+        <a href="javascript:;" class="border-btn" (click)="cancel(newCnsIssueForm)" l10nTranslate>Reset</a>
+        <button [disabled]="!newCnsIssueForm.form.valid || !newCnSissue.division?.id || !newCnSissue.region || !newCnSissue.successionPlan" class="blue-btn" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+  <!--  CREATE NEW C&S ISSUE END  -->
+
+  <!--  CREATE SUB DIVISION  -->
+  <div class="create-sub-div-wrapper" *ngIf="activeTab === 3">
+    <form (ngSubmit)="onSubmit(subDivisionForm)" #subDivisionForm="ngForm">
+      <div class="grid-inputfield">
+        <div class="col overflow-visible">
+          <!-- DATA CONTENT -->
+          <div class="data-content">
+            <label class="lbl-tilte">Parent Division Name</label>
+            <div class="std-org-box">
+              <app-dropdown
+                [options]="divisionOptions"
+                (optSelect)="onSelectCnS('parentDivision', $event, subDivisionForm)"
+                [selected]="newDivisionModel.parentDivision.name"
+                ngDefaultControl
+                name="parentStandardId"
+                className="data-input-fields"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field">Region</label>
+            <div class="std-org-box">
+              <app-dropdown
+                required
+                ngDefaultControl
+                name="standardId"
+                [options]="regionOptions"
+                (optSelect)="onSelectCnS('region', $event)"
+                [selected]="newDivisionModel.region"
+                placeholder="{{!isEditedMode && newDivisionModel.parentDivision.id === null ? 'Region Name' : ''}}"
+                className="data-input-fields"
+              ></app-dropdown>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field">{{this.newDivisionModel.parentDivision.id && newDivisionModel.parentDivision.id !== 'Add' ? 'Sub-' : ''}}Division ID</label>
+            <div class="std-org-box">
+              <div class="available-box">
+                <app-textbox
+                  type="text"
+                  name="id"
+                  [(ngModel)]="newDivisionModel.id"
+                  placeholder="{{newDivisionModel.parentDivision.id && newDivisionModel.parentDivision.id !== 'Add' ? 'Sub-Division ID' : 'Division ID'}}"
+                  required
+                  [isSearch]=false
+                  [value]="''"
+                  ngDefaultControl
+                  className="data-input-fields"
+                  [maxLength]="100"
+                  (pressEnter)="onSearchDivision()"
+                  [readOnly]="isEditedMode"
+                ></app-textbox>
+              </div>
+            </div>
+          </div>
+          <div class="data-content">
+            <label class="lbl-tilte required-field">{{this.newDivisionModel.parentDivision.id && newDivisionModel.parentDivision.id !== 'Add' ? 'Sub-' : ''}}Division Name</label>
+            <div class="available-box">
+              <app-textbox
+                type="text"
+                name="firstName"
+                [(ngModel)]="newDivisionModel.name"
+                placeholder="{{newDivisionModel.parentDivision.id && newDivisionModel.parentDivision.id !== 'Add' ? 'Sub-Division Name' : 'Division Name'}}"
+                [isSearch]=false
+                [value]="newDivisionModel.name"
+                required
+                ngDefaultControl
+                className="data-input-fields"
+                [maxLength]="100"
+              ></app-textbox>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="data-btn">
+        <a href="javascript:;" class="border-btn" (click)="cancel(subDivisionForm)" l10nTranslate>Reset</a>
+        <a href="javascript:;" class="red-btn" (click)="delete(subDivisionForm)" *ngIf="isEditedMode" l10nTranslate>Delete</a>
+        <button [disabled]="!subDivisionForm.form.valid || !newDivisionModel.region" class="blue-btn" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+  <!--  CREATE SUB DIVISION END  -->
+
+    <!--  DATA INPUT NEW STANDARD  -->
+    <div class="data-newStandard-wrapper" *ngIf="activeTab === 4" style="display: none;">
+      <form (ngSubmit)="onSubmit()" #newStandardForm="ngForm">
+        <div class="grid-inputfield">
+          <div class="col">
+            <!-- DATA CONTENT -->
+            <div class="data-content">
+              <label class="lbl-tilte" l10nTranslate>dataInput.Identifying-No</label>
+              <div class="identifying-box">
+                <app-textbox
+                  [(ngModel)]="newStandard.name"
+                  ngDefaultControl
+                  type="text"
+                  required
+                  name="firstName"
+                  placeholder='Enter here'
+                  [isSearch]=false
+                  className="data-input-fields"
+                ></app-textbox>
+              </div>
+            </div>
+            <div class="data-content">
+                <label class="lbl-tilte" l10nTranslate>Org</label>
+                <div class="div-box">
+                  <app-dropdown
+                    [options]="organizations"
+                    required
+                    (optSelect)="onOrganizationSelect('organization.id', $event)"
+                    placeholder="{{isEditedMode ? '' : 'Select'}}"
+                    className="data-input-fields"
+                  ></app-dropdown>
+                </div>
+              </div>
+            <div class="data-content">
+              <label class="lbl-tilte" l10nTranslate>Description</label>
+              <div class="desc-box">
+                <app-textbox
+                  type="text"
+                  name="firstName"
+                  [(ngModel)]="newStandard.description"
+                  ngDefaultControl
+                  required
+                  [value]="''"
+                  placeholder='Enter here'
+                  [isSearch]=false
+                  className="data-input-fields"
+                ></app-textbox>
+              </div>
+            </div>
+            <div class="data-content">
+                <label class="lbl-tilte" l10nTranslate>Edition</label>
+                <div class="desc-box">
+                  <app-textbox
+                    type="text"
+                    name="firstName"
+                    [(ngModel)]="newStandard.edition"
+                    ngDefaultControl
+                    required
+                    [value]="''"
+                    placeholder='Enter here'
+                    [isSearch]=false
+                    className="data-input-fields"
+                  ></app-textbox>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="data-btn">
+          <a href="javascript:;" class="border-btn" l10nTranslate>Cancel</a>
+          <button [disabled]="!newStandardForm.form.valid" class="blue-btn" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+    <!--  DATA INPUT NEW STANDARD END -->
+</div>
+<app-model (createUser)="addOrgCreate($event)" (close)="closeOrgCreate($event)" *ngIf="isOpenOrgCreateModal" [modalType]="'create-new-org'"></app-model>
+<app-model (createDivision)="createDivision($event)" (close)="closeDivisionCreate($event)" *ngIf="isOpenDivisionCreateModal" [modalType]="'create-new-division'" [modalProperties]="modalProperties"></app-model>

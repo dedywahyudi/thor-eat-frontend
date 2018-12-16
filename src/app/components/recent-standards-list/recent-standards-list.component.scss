@@ -1,0 +1,44 @@
+@import "../../../assets/scss/base/_variables";
+
+//STANDARDS-LIST-WRAPPER
+.standards-list-wrapper {
+  .standards-list-section {
+    .no-std-title {
+      font-size: 26px;
+      color: $content-text-black;
+      font-weight: 600;
+      padding: 0 0 9px 0;
+    }
+    .no-std-content {
+      font-size: 14px;
+      color: #595959;
+      font-weight: 300;
+      line-height: 20px;
+      padding: 0 0 30px 0;
+    }
+  }
+  .recent-list {
+    .recent-title {
+      font-size: 20px;
+      color: $content-text-black;
+      font-weight: 600;
+      padding: 0 0 15px 0;
+    }
+    .select-std-nav {
+      ul {
+        li {
+          margin: 0 0 13px 0;
+          a {
+            font-size: 14px;
+            color: #137bb7;
+            font-weight: 600;
+
+          }
+          &:last-child {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

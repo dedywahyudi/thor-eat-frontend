@@ -1,0 +1,49 @@
+<!-- DROPDOWN -->
+<div class="dropdown-wrapper {{className}}" [class.is-open]="isOpen">
+  <div class="box" (click)="toggle($event)">
+    <ng-container *ngIf="className==='country-dropdown'">
+      <div class="dropdown-selected" *ngIf="!placeholder" l10nTranslate><span>{{selected}}</span></div>
+      <div class="dropdown-selected" *ngIf="placeholder" l10nTranslate><span>{{placeholder}}</span></div>
+    </ng-container>
+    <ng-container *ngIf="className!=='country-dropdown' && className!=='standard-dropdown' && className!=='single-dropdown'">
+      <div class="dropdown-selected" *ngIf="!placeholder"><span>{{selected}}</span></div>
+      <div class="dropdown-selected" *ngIf="placeholder"><span>{{placeholder}}</span></div>
+    </ng-container>
+    <ng-container *ngIf="className==='standard-dropdown' || className==='single-dropdown'">
+      <div class="dropdown-selected" *ngIf="!placeholder"><span>{{selected?.name}}</span></div>
+      <div class="dropdown-selected" *ngIf="placeholder"><span>{{placeholder}}</span></div>
+    </ng-container>
+  </div>
+
+  <!-- DROPDOWN OPTIONS -->
+  <ul class="dropdown-options">
+    <li *ngIf="placeholder" (click)="$event.stopPropagation()">{{placeholder}}</li>
+    <ng-container *ngIf="className==='country-dropdown'">
+      <li id="li{{i}}" *ngFor="let option of options; let i = index" [class.active]="selected === option" (click)="optionSelect(option, $event)"
+        l10nTranslate>
+        {{option}}
+      </li>
+    </ng-container>
+    <ng-container *ngIf="className==='pagination-dropdown'">
+      <li id="li{{i}}" *ngFor="let option of options;" [class.active]="selected === option" (click)="optionSelect(option, $event)">
+        {{option}}
+      </li>
+    </ng-container>
+    <ng-container *ngIf="className==='standard-dropdown'">
+      <li id="li{{i}}" *ngFor="let option of options;" [class.active]="selected?.id === option.id" (click)="optionSelect(option, $event)">
+        {{option.name}}
+      </li>
+    </ng-container>
+    <ng-container *ngIf="className==='single-dropdown'">
+      <li id="li{{i}}" *ngFor="let option of options;" [class.active]="selected?.id === option.id" (click)="optionSelect(option, $event)">
+        {{option.name}}
+      </li>
+    </ng-container>
+    <ng-container *ngIf="className!=='country-dropdown' && className!=='pagination-dropdown' && className!=='standard-dropdown' && className!=='single-dropdown'">
+      <li id="li{{i}}" *ngFor="let option of options; let i = index" [class.active]="selected === option.name" (click)="optionSelect(option, $event)">
+        {{option.name}}
+      </li>
+    </ng-container>
+  </ul>
+</div>
+<!-- DROPDOWN END -->

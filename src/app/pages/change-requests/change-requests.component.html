@@ -1,0 +1,35 @@
+<!-- CHANGE REQUESTS PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container change-requests-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper no-print">
+    <app-header l10n-title title="changeRequests.title" pageType="change-requests">
+    </app-header>
+  </div>
+  <!-- MAIN -->
+  <main class="main-content no-print">
+    <div class="change-requests-wrapper">
+      <app-change-requests-table [data]="results" (printing)="printAllChangeRequests()" (getFilter)="getQueryResult($event)"
+        [paginate]="paginationOptions" (approveOrReject)="approveOrReject($event)"></app-change-requests-table>
+      <div class="pagination-wrapper">
+        <app-pagination [paginate]="paginationOptions" (goto)="setPage($event)" (clickChangePageSize)="changePageSize($event)"
+          *ngIf="paginationOptions.totalItems"></app-pagination>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+  <!-- PRINT -->
+  <div id="section-to-print" class="hidden-section">
+    <app-change-requests-table [data]="allRequests" (printing)="printAllChangeRequests()" (getFilter)="getQueryResult($event)"
+      [paginate]="allPagination" (approveOrReject)="approveOrReject($event)"></app-change-requests-table>
+  </div>
+</div>
+<app-model (close)="isOpenModal=$event" *ngIf="isOpenModal" [modalType]="modalType" [rowData]="rowData" (confirmApprove)="confirmApprove($event)" (confirmReject)="confirmReject($event)" [modalProperties]="modalProperties"></app-model>
+<!-- KEYWORD SEARCH PAGE END -->

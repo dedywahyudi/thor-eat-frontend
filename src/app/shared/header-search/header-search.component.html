@@ -1,0 +1,106 @@
+<!-- HEADER SEARCH WIDGET -->
+<div class="header-search-widget no-print">
+  <div class="search-bar">
+    <span class="search-txt" l10nTranslate>searchBtn <span l10nTranslate>lblKeySearch</span>:</span>
+    <div class="search-input-wrapper">
+      <!-- SEARCH INPUT BOX  -->
+      <div class="search-input-box">
+        <app-textbox [isSearch]="true" name="searchs" className="black-search-input" type="search" [(ngModel)]="searchTxt"
+          [value]="searchTxt" ngDefaultControl placeholder="Search" (pressEnter)="onSearch()"></app-textbox>
+
+      </div>
+      <!-- SEARCH INPUT BOX END -->
+      <!-- SEARCH BUTTON -->
+      <div class="btn-group">
+        <a href="javascript:;" class="blue-btn" (click)="onSearch()" l10nTranslate>searchBtn</a>
+        <a href="javascript:;" class="border-btn" (click)="reset()" l10nTranslate>Reset</a>
+      </div>
+      <!-- SEARCH BUTTON END -->
+    </div>
+  </div>
+</div>
+
+<!-- HEADER FILTERS -->
+<div class="header-filter-area no-print">
+  <label class="main-lbl" l10nTranslate>filter</label>
+  <div class="filter-grid-box">
+
+    <!-- STAND-ID-FILTER -->
+    <div class="col">
+      <div class="filter-content stand-id-filter">
+        <label l10nTranslate>StdIdentify</label>
+        <div class="fields">
+          <app-textbox type="text" name="keySearch" placeholder="Identifying" [isSearch]="false" [(ngModel)]="keyword"
+            [value]="keyword" ngDefaultControl (pressEnter)="onSearch()"></app-textbox>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORGANIZATION -->
+    <div class="col">
+      <div class="filter-content organization-filter">
+        <label l10nTranslate>Org</label>
+        <div class="fields">
+          <app-dropdown [options]="orgOptions" className="standard-dropdown" (optSelect)="onSelect('organizationId', $event)" [selected]="orgOptionSelected"></app-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <!-- STANDARD DESCRIPTION -->
+    <div class="col">
+      <div class="filter-content stand-desc-filter">
+        <label l10nTranslate>StdDescription</label>
+        <div class="fields">
+          <app-textbox type="text" name="description" placeholder="Description" [isSearch]="false" [(ngModel)]="description"
+            [value]="description" ngDefaultControl (pressEnter)="onSearch()"></app-textbox>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIVISIONS -->
+    <div class="col">
+      <div class="filter-content divisions-filter">
+        <label l10nTranslate>Div</label>
+        <div class="fields">
+          <app-dropdown [options]="divisionOptions" className="standard-dropdown" (optSelect)="onSelect('divisionId', $event)"
+            [selected]="divisionOptionSelected"></app-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUB DIVISIONS -->
+    <div class="col">
+      <div class="filter-content sub-divisions-filter">
+        <label l10nTranslate>SubDiv</label>
+        <div class="fields">
+          <app-dropdown [options]="subDivisionOptions" className="standard-dropdown" (optSelect)="onSelect('subDivisionId', $event)"
+            [selected]="subDivisionOptionSelected"></app-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT LINE -->
+    <div class="col">
+      <div class="filter-content product-line-filter">
+        <label l10nTranslate>ProductLine</label>
+        <div class="fields">
+          <app-dropdown [options]="productLineOptions" className="standard-dropdown" (optSelect)="onSelect('productLine', $event)"
+            [selected]="productLineOptionSelected"></app-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="col">
+      <div class="filter-content email-filter">
+        <label l10nTranslate>Email Address</label>
+        <div class="fields">
+            <app-dropdown [options]="productLineContactOptions" className="standard-dropdown" (optSelect)="onSelect('email', $event)"
+            [selected]="productLineContactOptionSelected"></app-dropdown>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- HEADER FILTERS END -->

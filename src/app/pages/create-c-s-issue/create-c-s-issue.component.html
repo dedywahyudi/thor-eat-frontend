@@ -1,0 +1,25 @@
+<!-- EDIT STANDARD PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container edit-standard-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper">
+    <app-header l10n-title title="csIssues.create" pageType="create-cs-issue">
+    </app-header>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="create-cns-issue-wrapper">
+      <app-data-input-forms [activeTab]="activeTab"></app-data-input-forms>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+<!-- DATA INPUT PAGE END -->

@@ -1,0 +1,27 @@
+<!-- NAVIGATION TAB  -->
+<div class="navigation-tab">
+  <nav class="nav-tab">
+    <ul *ngIf="tabType!=='division-organization'">
+      <li (click)="toggleMenu(1)" [ngClass]="{'is-active': activeTab==1}">
+        Create New Standard
+      </li>
+      <li (click)="toggleMenu(2)" [ngClass]="{'is-active': activeTab==2}">
+        Create New C&S Issue
+      </li>
+      <li (click)="toggleMenu(3)" [ngClass]="{'is-active': activeTab==3}">
+        Create Division or Sub-Division
+      </li>
+      <li (click)="toggleMenu(4)" [ngClass]="{'is-active': activeTab==4}" style="display: none;">
+        Create New Standard
+      </li>
+    </ul>
+    <ul *ngIf="tabType==='division-organization'">
+      <li (click)="toggleMenu(1)" [ngClass]="{'is-active': activeTab==1}">
+        Division or Sub-Division
+      </li>
+      <li (click)="toggleMenu(2)" [ngClass]="{'is-active': activeTab==2}">
+        Organization
+      </li>
+    </ul>
+  </nav>
+</div>

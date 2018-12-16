@@ -1,0 +1,170 @@
+@import "../../../assets/scss/base/_variables";
+// STANDARD-AVAILABLE-DETAIL
+.standard-available-detail {
+
+  // STD-AVAIL-HEADER
+  .std-avail-header {
+    .std-avail-title1 {
+      font-size: 39px;
+      color: $content-text-black;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: -5px;
+    }
+    .std-avail-title2 {
+      font-size: 19px;
+      color: $content-text-black;
+      padding: 4px 0 19px 0;
+    }
+    .detail-content {
+      .detail-head {
+        font-size: 20px;
+        color: $content-text-black;
+        padding-bottom: 5px;
+        display: block;
+      }
+      .details-content-txt {
+        font-size: 15px;
+        line-height: 18px;
+        color: $content-text-black;
+      }
+    }
+  }
+
+  // MASONRY-ITEM
+  .std-avail-items-wrapper {
+    margin: 20px 0 0 0;
+    .masonry-item {
+      width: 50%;
+      .inner-content {
+        padding: 15px 20px 0 20px;
+        background-color: #ffffff;
+        box-shadow: 0px 3px 7px 0 rgba(1, 2, 2, 0.05);
+        margin-bottom: 20px;
+        margin-right: 20px;
+        .widget-title {
+          display: flex;
+          font-size: 15px;
+          font-weight: 700;
+          margin-bottom: 14px;
+          p {
+            margin-right: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        .checkbox-container {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          .chk-group {
+            width: 50%;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            .checked-count-content {
+              display: flex;
+              min-width: 18px;
+              height: 19px;
+              justify-content: center;
+              align-items: center;
+              font-size: 12px;
+              font-weight: 600;
+              border-radius: 3px;
+              background-color: #f0f0f0;
+              margin: -1px 24px 0 0;
+            }
+
+            // EMAIL TOOLTIP BOX
+   .email-tooltip-widget {
+    display: none;
+    position: fixed;
+    z-index: 200;
+    transition: all 0.3s;
+    &.is-open {
+      display: block;
+    }
+    .email-tooltip-box {
+      width: 250px;
+      background: #fff;
+      box-shadow: 1.5px 2.598px 11px 0px rgba(1, 2, 2, 0.055);
+      border-radius: 3px;
+      .email-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 7px 0 18px;
+        background: #268dc8;
+        height: 30px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        h4 {
+          font-size: 14px;
+          color: $content-text-white;
+          font-weight: 600;
+        }
+        .close-icon {
+          width: 18px;
+          height: 18px;
+          border-radius: 3px;
+          background: rgb(27, 123, 178);
+          cursor: pointer;
+          &:before {
+            content: "";
+            display: flex;
+            width: 6px;
+            height: 6px;
+            background: url('../../../assets/i/close-white.svg') no-repeat;
+            background-size: 6px 6px;
+            margin: 6px auto;
+          }
+        }
+      }
+      .div-content {
+        background: #f3f3f3;
+        height: 30px;
+        .div-txt {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          color: $content-text-black;
+          font-weight: 300;
+          text-align: center;
+          padding: 7px 0 0 14px;
+          span {
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+      }
+      .email-box-content {
+        padding: 6px 10px;
+        max-height: 144px;
+        overflow-y: auto;
+        &.is-open {
+          display: block;
+        }
+        a {
+          display: flex;
+          border-bottom: 1px solid #f0f0f0;
+          padding: 8px 0;
+          &:last-child {
+            border-bottom: none;
+          }
+          span {
+            color: #268dc8;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 0 5px;
+          }
+        }
+      }
+    }
+  }
+          }
+        }
+      }
+    }
+  }
+}

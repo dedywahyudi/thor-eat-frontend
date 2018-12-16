@@ -1,0 +1,115 @@
+<!-- C S ISSUE DETAIL PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container c-s-issue-detail-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper no-print">
+    <app-header l10n-title title="csIssueDetail.title" pageType="c-s-issue-detail">
+    </app-header>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="c-s-issue-detail-wrapper">
+      <div class="top-area no-print">
+        <div class="thumbnail">
+          <ul>
+            <li>
+              <a [routerLink]="['/c-s-issues']" class="current links">
+                <span l10nTranslate>C&S Issues</span> >
+              </a>
+            </li>
+            <li><a href="javascript:;" class="links" l10nTranslate>Issue Details</a></li>
+          </ul>
+        </div>
+        <!-- thumbnail -->
+        <div class="right-side-btn">
+          <div class="print-email-btn">
+            <!-- PRINT BTN -->
+            <a href="javascript:;" (click)="print()" class="print-btn">
+              <span class="print-icon"></span>
+              <span class="right-btn-txt" l10nTranslate>Print</span>
+            </a>
+          </div>
+          <div class="print-email-btn">
+            <!-- EMAIL BTN -->
+            <a href="javascript:;" (click)="sendEmail()" class=" email-btn blue-btn">
+              <span class="email-icon"></span>
+              <span class="right-btn-txt" l10nTranslate>Email</span>
+            </a>
+          </div>
+        </div>
+        <!-- RIGHT SIDE BTN -->
+      </div>
+      <!-- TOP　AREA -->
+      <div id="section-to-print">
+        <div class="row">
+            <div class="col">
+              <div class="status-box boxs {{'color-' + issueDetail['priority']}}">
+                <div class="label-txt" l10nTranslate>Priority</div>
+                <div class="red-txt">
+                  {{issueDetail['priority']}}
+                </div>
+            </div>
+          </div>
+          <!-- COL -->
+          <div class="col">
+            <div class=" boxs">
+              <div class="label-txt" l10nTranslate>Created By</div>
+              <div class="value-txt">{{issueDetail['createdBy']}}</div>
+            </div>
+          </div>
+          <!-- COL -->
+          <div class="col" *ngIf="issueDetail.standard">
+            <div class=" boxs">
+              <div class="label-txt" l10nTranslate>Standard Name</div>
+              <div class="value-txt">{{issueDetail.standard.name}}</div>
+            </div>
+          </div>
+          <!-- COL -->
+          <div class="col">
+            <div class=" boxs" *ngIf="issueDetail.division?.name">
+              <div class="label-txt" l10nTranslate>Eaton Divison</div>
+              <div class="value-txt">{{issueDetail.division.name}}</div>
+            </div>
+          </div>
+          <!-- COL -->
+          <div class="col">
+            <div class=" boxs">
+              <div class="label-txt" l10nTranslate>Est Completion Date</div>
+              <div class="value-txt">{{issueDetail['estimatedCompletionDate'] | datex}}</div>
+            </div>
+          </div>
+          <!-- COL -->
+          <div class="col">
+            <div class="boxs">
+              <div class="label-txt" l10nTranslate>Created on</div>
+              <div class="value-txt">{{issueDetail['createdDate'] | datex}}</div>
+            </div>
+          </div>
+          <!-- COL -->
+          <div class="col">
+            <div class="boxs">
+              <div class="label-txt">VP/GM</div>
+              <div class="value-txt">{{issueDetail['vpgmName']}}</div>
+            </div>
+          </div>
+          <!-- COL -->
+        </div>
+        <!-- ROW -->
+
+        <app-c-s-issues-detail-panel [data]="issueDetail">
+        </app-c-s-issues-detail-panel>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+<app-model (close)="isOpenModal=$event" *ngIf="isOpenModal" [modalType]="modalType"></app-model>
+<!-- DATA INPUT PAGE END -->

@@ -1,0 +1,346 @@
+<div class="move-boxs">
+	<div class="left-area" [sortablejs]="" [sortablejsOptions]="optionsModule">
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !organizationHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Organization</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="organizationHide = !organizationHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data.standard?.organization?.name}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !standardDirectiveHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Standard, Directive, or Regulation Identifier</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="standardDirectiveHide = !standardDirectiveHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data.standard?.name}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !descriptionHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Description of the C&S Issue for Initiative</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="descriptionHide = !descriptionHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['description']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !actionPlanHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Action Plan</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="actionPlanHide = !actionPlanHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['actionPlan']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !personsResponsibleHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Person Responsible for Action Plan</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="personsResponsibleHide = !personsResponsibleHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['personsResponsible']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !engineerReviewDateHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Date C&S Issue was last reviewed with Engineering Leader</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="engineerReviewDateHide = !engineerReviewDateHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['engineerReviewDate'] | datex}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !engineerLeaderNameHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Engineering Leader Name</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="engineerLeaderNameHide = !engineerLeaderNameHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['engineerLeader']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !financialImpactHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>dataInput.Financial-Impact</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="financialImpactHide = !financialImpactHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['financialImpact']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+
+		<!-- COL -->
+
+	</div>
+	<!--LEFT AREA-->
+
+	<div class="right-area" [sortablejs]="" [sortablejsOptions]="optionsModule">
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !impactSummaryHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Summary 'explanation' of the impact</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="impactSummaryHide = !impactSummaryHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['impactSummary']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !criticalLeadershipHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Action Plan involves critical role or corporate leadership</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="criticalLeadershipHide = !criticalLeadershipHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['criticalRoleLeadership'] ? "YES" : "NO"}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !offensiveDefensiveHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Action Plan Offensive or Defensive?</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="offensiveDefensiveHide = !offensiveDefensiveHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p class="fz20">
+						{{data['offensiveDefensive']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !externalPartnersHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>List any 'external' partners that are needed to complete the Action Plan</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="externalPartnersHide = !externalPartnersHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['externalPartners']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !createdDateHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Date the C&S Score Card </h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="createdDateHide = !createdDateHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p class="fz20">{{data['createdDate'] | datex}}</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !regionGroupHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Region or Group</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="regionGroupHide = !regionGroupHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['region']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !strategicPlanHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Alignment with Strategic Plan </h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="strategicPlanHide = !strategicPlanHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['roadmapAlignment']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+		<div class="col">
+			<div class="move-items" [ngClass]="{'open': !successionPlanHide}">
+				<div class="title-bar">
+					<h4 l10nTranslate>Description of Succession Plan for Critical roles</h4>
+					<div class="right-tool">
+						<a href="javascript:;" class="move-icon"></a>
+						<a href="javascript:;" class="status-icon" (click)="successionPlanHide = !successionPlanHide">
+						</a>
+					</div>
+				</div>
+				<!-- TITLE BAR -->
+				<div class="move-body">
+					<p>
+						{{data['successionPlan']}}
+					</p>
+				</div>
+				<!-- MOVE BODY -->
+			</div>
+			<!-- MOVE ITEMS -->
+		</div>
+		<!-- COL -->
+	</div>
+	<!--RIGHT AREA-->
+</div>
+<!-- MOVE BOXS -->

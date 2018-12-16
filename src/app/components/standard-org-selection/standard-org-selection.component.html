@@ -1,0 +1,36 @@
+<!-- STANDARD-ORG-SELECTION  -->
+<div class="aside">
+  <div class="org-selection-wrapper">
+    <p class="org-selection-txt" l10nTranslate>orgPage.std-org-para</p>
+    <div class="org-selection-input">
+      <app-dropdown [options]="orgOptions" [selected]="activeOrg" (optSelect)="onSelect('organizationId', $event)" placeholder="{{preloaded ? '' : 'Select Standard Organizations'}}"
+        className="data-input-fields"></app-dropdown>
+    </div>
+  </div>
+  <!-- ORG-SELECTION-LIST-BOX -->
+  <div class="org-selection-list-box">
+    <div class="org-select-list-content">
+      <h3 class="org-selection-title" l10nTranslate>orgPage.Std-Available</h3>
+      <p class="org-list-txt" l10nTranslate>orgPage.Std-Available-para</p>
+    </div>
+    <!-- ORG-INPUT-LIST -->
+    <div class="org-input-list">
+      <div class="org-search-input">
+        <app-textbox [isSearch]=true className="blue-search-input" type="text" name="searchs" [(ngModel)]="searchText"
+          [value]="searchText" (keyUp)="onSearch()" placeholder='Type to filter Standards' ngDefaultControl></app-textbox>
+      </div>
+      <!-- SEARCH-LIST-SECTION  -->
+      <div class="search-list-section">
+        <div class="scroll-wrapper">
+          <ul>
+            <li [class.is-active]="activeStd===sd.id" *ngFor="let sd of standards_shown" (click)="selectStandard(sd)">
+              {{sd.standard.name}}
+              <br />
+              {{sd.standard.description}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

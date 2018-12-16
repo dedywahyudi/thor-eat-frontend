@@ -1,0 +1,24 @@
+<!-- HEADER ORG SEARCH -->
+<div class="header-org-search">
+  <div class="header-org-left add-more-std">
+    <nav class="selected-list-nav">
+      <ul>
+        <ng-container *ngFor="let tab of tabs; let i = index">
+          <li [class.is-active]="i===activeTab" (click)="changeTab(i)">
+            <span class="selected-list-txt">{{tab.name}}</span>
+            <span class="close-icon" (click)="removeTab(i)"></span>
+          </li>
+        </ng-container>
+      </ul>
+    </nav>
+    <a href="javascript:;" class="add-std-btn blue-btn" (click)="addTab()">
+      <span class="plus-icon">+</span>
+      Add Standard
+    </a>
+  </div>
+  <a *ngIf="selectedEmailLength>0" href="javascript:;" (click)="clickSendEmail()" class="blue-btn send-email-btn" [ngClass]="{'disabled': !hasImpactedDivisions()}">
+    <span class="icon"></span>
+    Send Email
+  </a>
+</div>
+<!-- HEADER ORG SEARCH END -->

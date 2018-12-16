@@ -1,0 +1,37 @@
+<!-- KEYWORD SEARCH PAGE -->
+
+<!-- LEFT-NAVIGATION -->
+<app-left-navigation [isOffcanvas]="isOffcanvas"></app-left-navigation>
+
+<div class="page-container keyword-search-page" [class.is-offcanvas]="isOffcanvas['value']">
+
+  <!-- HEADER -->
+  <div class="header-wrapper no-print">
+    <app-header  title="keyWord.title" pageType="keyword-search" (getFilter)="getQueryResult($event)"
+      (resetFilter)="reset();">
+    </app-header>
+  </div>
+  <!-- MAIN -->
+  <main class="main-content fixed no-print" *ngIf="results" [class.is-mail-open]="isMail >= 0">
+    <div class="keyword-search-wrapper">
+      <app-search-results-table [data]="results" (deleting)="modalType='delete-row';setRowData($event);" (mailOpen)="isMail=$event"
+        [paginate]="paginationOptions" (printing)="printAllStandardDivisions()"></app-search-results-table>
+      <div class="pagination-wrapper" *ngIf="results.length > 0">
+        <app-pagination [paginate]="paginationOptions" (clickChangePageSize)="changePageSize($event)" (goto)="setPage($event)"
+          *ngIf="paginationOptions.totalItems"></app-pagination>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+  <!-- PRINT -->
+  <div id="section-to-print" class="hidden-section">
+    <app-search-results-table [data]="allStandards" (deleting)="modalType='delete-row';setRowData($event);" (mailOpen)="isMail=$event"
+      [paginate]="allPagination" (printing)="printAllStandardDivisions()"></app-search-results-table>
+  </div>
+</div>
+<app-model (close)="isOpenModal=$event" *ngIf="isOpenModal" [rowData]="rowData" [modalProperties]="modalProperties"
+  [modalType]="modalType" (confirmDelete)="deleteStandardDivision($event)"></app-model>
+<!-- KEYWORD SEARCH PAGE END -->
